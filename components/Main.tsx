@@ -1,11 +1,11 @@
-import { Box, Center, useColorModeValue, Image, Avatar, Text, Flex, HStack, Icon } from "native-base";
+import { Box, Center, useColorModeValue, Image, Avatar, Text, Flex, HStack, Icon, Button } from "native-base";
 import React from "react";
 import { Dimensions, Animated, StatusBar, Pressable } from "react-native";
 import { SceneMap, TabView } from "react-native-tab-view";
-import { Home } from "./Home";
+import { Gallery } from "./Gallery";
 import { Profile } from "./Profile";
 import { Search } from "./Search";
-import { Ionicons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 
 
 
@@ -14,7 +14,7 @@ const initialLayout = {
 };
 
 const renderScene = SceneMap({
-    home: Home,
+    gallery: Gallery,
     search: Search,
     profile: Profile,
 });
@@ -23,8 +23,8 @@ export const Main = () => {
 
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([{
-        key: "home",
-        title: "Home"
+        key: "gallery",
+        title: "Gallery"
     }, {
         key: "search",
         title: "Search"
@@ -33,30 +33,15 @@ export const Main = () => {
         title: "Profile"
     }]);
 
-    interface IR {
-        navigationState: {
-            routes: any[]
-        }
-        position: {
-            interpolate: (args: sub) => any
-        }
-    }
+   
+    const renderTabBar = (props: IRenderTabBar) => {
 
-    type sub = {
-        inputRange: any;
-        outputRange: any;
-    }
-    const renderTabBar = (props: IR) => {
-
-        const inputRange = props.navigationState.routes.map((x, i) => i);
-        const icon = ['home', 'search', 'man'];
+      
+        const icon = ['home', 'search1', 'user'];
         return (
             <Box flexDirection="row">
                 {props.navigationState.routes.map((route, i) => {
-                    // const opacity = props.position.interpolate({
-                    //     inputRange,
-                    //     outputRange: inputRange.map(inputIndex => inputIndex === i ? 1 : 0.5)
-                    // });
+                    
                     const color = index === i ? useColorModeValue("#000", "#e5e5e5") : useColorModeValue("#1f2937", "#a1a1aa");
                     const borderColor = index === i ? "cyan.500" : useColorModeValue("coolGray.200", "gray.400");
 
@@ -66,12 +51,15 @@ export const Main = () => {
                             borderBottomWidth="3"
                             borderColor={borderColor}
                             flex={1}
-                            alignItems="center"
-                            p="3"
+                            bg={'white'}
+                            p="2"
                         >
+
                             <Pressable onPress={() => setIndex(i)}>
-                                <Icon as={Ionicons} name={icon[i]} size={'lg'} />
-                                <Animated.Text style={{ color }}>{route.title}</Animated.Text>
+                                <Center>
+                                    <Icon as={AntDesign} name={icon[i]} size={'lg'} />
+                                    <Animated.Text style={{ color }}>{route.title}</Animated.Text>
+                                </Center>
                             </Pressable>
                         </Box>
                     )
@@ -93,3 +81,16 @@ export const Main = () => {
     );
 }
 
+interface IRenderTabBar{
+    navigationState: {
+        routes: any[]
+    }
+    position: {
+        interpolate: (args: sub) => any
+    }
+}
+
+type sub = {
+    inputRange: any;
+    outputRange: any;
+}
