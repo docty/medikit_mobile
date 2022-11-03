@@ -1,4 +1,4 @@
-import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider } from "native-base";
+import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider, Box } from "native-base";
 import React, { Children } from "react";
 
 const data = [
@@ -33,47 +33,53 @@ export const Profile = () => {
     return (
         <>
 
-            <VStack space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'12'}>
+            <VStack bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'12'}>
                 <Avatar
                     source={{ uri: "https://i.pinimg.com/736x/26/03/ef/2603ef9f953f28190245b81cf2c2aea8.jpg" }}
                     size={'2xl'}
                 />
                 <Text fontSize="sm" fontWeight={'medium'}>@decimalvalues</Text>
                 <HStack space="4"  >
-                    <Text fontSize="sm">120k followers</Text>
+                    <Text fontSize="sm" color={'blueGray.700'}>120k followers</Text>
                     <Divider orientation="vertical" />
                     <Text fontSize="sm">20k following</Text>
                 </HStack>
-                <Button
-                    colorScheme="primary"
-                    px={'10'}
-                    onPress={btnFollow}
-                >
-                    Follow
-                </Button>
-                <Button
-                    colorScheme="secondary"
-                    onPress={btnUpload}
-                    px={'10'}
-                >
-                    Upload
-                </Button>
+                <VStack  pb={'3'}>
+                    {
+                        'guest' === 'guest' ? <Button
+                            colorScheme="primary"
+                            px={'10'}
+                            onPress={btnFollow}
+                        >
+                            Follow
+                        </Button> : <Button
+                            colorScheme="secondary"
+                            onPress={btnUpload}
+                            px={'10'}
+                        >
+                            Upload
+                        </Button>
+                    }
+
+                </VStack>
+
+
+
             </VStack>
 
 
-            <ScrollView>
+            <ScrollView bg={'white'}>
 
-                <Flex w={'full'} flexDirection={'row'} flexWrap={'wrap'} >
+                <Flex w={'full'} flexDirection={'row'} flexWrap={'wrap'} px={'2'}>
                     {
                         Children.toArray(data.map(item => (
-                            <Center my={'2'} mx={'2'} >
+                            <Center flexGrow={'1'} flexBasis={'150'} px={'1'} py={'2'}>
                                 <Image
-                                    source={{
-                                        uri: item
-                                    }}
-                                    style={{ resizeMode: 'contain' }}
+                                    source={{ uri: item }}
                                     alt="Alternate Text"
-                                    size={'180'}
+                                    size={'300'}
+                                    resizeMethod={'resize'}
+                                    resizeMode={'cover'}
                                 />
                             </Center>
                         )))

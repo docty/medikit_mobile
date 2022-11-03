@@ -21,27 +21,29 @@ const renderScene = SceneMap({
 
 export const Main = () => {
 
-    const [index, setIndex] = React.useState(0);
+    const [index, setIndex] = React.useState(1);
     const [routes] = React.useState([{
-        key: "gallery",
-        title: "Gallery"
-    }, {
         key: "search",
         title: "Search"
-    }, {
+    },
+    {
+        key: "gallery",
+        title: "Gallery"
+    },
+    {
         key: "profile",
         title: "Profile"
     }]);
 
-   
+ 
     const renderTabBar = (props: IRenderTabBar) => {
 
-      
-        const icon = ['home', 'search1', 'user'];
+
+        const icon = ['search1', 'picture', 'user'];
         return (
             <Box flexDirection="row">
                 {props.navigationState.routes.map((route, i) => {
-                    
+
                     const color = index === i ? useColorModeValue("#000", "#e5e5e5") : useColorModeValue("#1f2937", "#a1a1aa");
                     const borderColor = index === i ? "cyan.500" : useColorModeValue("coolGray.200", "gray.400");
 
@@ -77,11 +79,12 @@ export const Main = () => {
             onIndexChange={setIndex}
             initialLayout={initialLayout}
             style={{ marginTop: StatusBar.currentHeight }}
+
         />
     );
 }
 
-interface IRenderTabBar{
+interface IRenderTabBar {
     navigationState: {
         routes: any[]
     }
