@@ -1,17 +1,37 @@
-import { Flex, HStack, Avatar, Text, ScrollView, Input, Center, Image, Icon, Box } from "native-base";
-import React, { Children } from "react";
+import { Flex, HStack, Avatar, Text, ScrollView, Input, Center, Image, Icon, Box, Pressable } from "native-base";
+import React, { Children, FunctionComponent } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Carousel from 'react-native-snap-carousel'
 import { Dimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-
+interface Props {
+    
+}
+ 
+// const Se: FunctionComponent = () => {
+//     return (  );
+// }
+ 
+// export default ;
 
 const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = 200
 
-const CarouselCardItem = ({ item, index }: any) => {
+const CarouselCardItem:FunctionComponent = ({ item, index }: any) => {
+    //const  jj = useNavigation<any>()
+     
     return (
-        <Box bg="primary.400" rounded="lg" height={'200'}>
+        <Pressable
+            p="2"
+            borderWidth="1"
+            onPress={()=>{
+                //jj.navigate('Enlarge', {name: 'qwerty'})
+            }}
+        
+        >
+             
+        <Box bg="primary.400" rounded="lg" height={'200'} >
             <Image
                 source={{ uri: item }}
                 alt="Alternate Text"
@@ -19,13 +39,15 @@ const CarouselCardItem = ({ item, index }: any) => {
                 resizeMode={'cover'}
             />
         </Box>
+        </Pressable>
+       
 
     )
 }
 
 
 export const Search = () => {
-
+ const  jj = useNavigation<any>()
     const trending = [
         'https://outfittrends.b-cdn.net/wp-content/uploads/2021/03/D5_PADGWAAAdSmO-400x500.jpeg',
         'https://d17a17kld06uk8.cloudfront.net/products/43VMDHH/CH3TJT57-default.jpg',
@@ -82,6 +104,7 @@ export const Search = () => {
                     itemWidth={ITEM_WIDTH}
                     inactiveSlideShift={0}
                     useScrollView={true}
+                 
 
                 />
 
@@ -98,8 +121,8 @@ export const Search = () => {
                     activeSlideAlignment={'start'}
                     inactiveSlideShift={0}
                     useScrollView={true}
-
-                />
+                   
+                /> 
 
                 <Text px={'3'} fontSize="lg" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Special Outing</Text>
 
@@ -113,7 +136,7 @@ export const Search = () => {
                     itemWidth={ITEM_WIDTH}
                     inactiveSlideShift={0}
                     useScrollView={true}
-
+                  
                 />
             </ScrollView>
         </>

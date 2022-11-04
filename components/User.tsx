@@ -1,28 +1,29 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider, Box, Pressable } from "native-base";
 import React, { Children, useEffect, useState } from "react";
-import { HomeScreenNavigationProp, UserRouterProp, ISrc, IUserData } from "../types";
-import { gallery, user } from "../utils/galleryData";
+import { HomeScreenNavigationProp, IGallery, ISrc, IUser, IUserData, UserRouterProp } from "../types";
+import { gallery, user } from '../utils/galleryData'
 
 
-export const Profile = () => {
+const User = () => {
     const navigation = useNavigation<HomeScreenNavigationProp>()
-
+    const { params } = useRoute<UserRouterProp>();
     const [response, setResponse] = useState<ISrc[]>([] as ISrc[]);
     const [individual, setIndividual] = useState<IUserData>({} as IUserData);
 
-
+ 
     const galleryData = Object.values(gallery);
     const userData = Object.values(user);
 
     useEffect(() => {
-        const ad = galleryData.find(value => value.uuid === '450943jklglmkwlerlt5l');
+        const ad = galleryData.find(value => value.uuid === params?.uuid);
         const as = Object.values(ad!.src)
         setResponse(as)
     }, [])
 
     useEffect(() => {
-        const ad = userData.find(value => value.uuid === '450943jklglmkwlerlt5l');
+
+        const ad = userData.find(value => value.uuid === params?.uuid);
         setIndividual(ad!)
 
     }, [])
@@ -59,7 +60,7 @@ export const Profile = () => {
                 </HStack>
                 <VStack pb={'3'}>
                     {
-                        'guest' !== 'guest' ? <Button
+                        'guest' === 'guest' ? <Button
                             colorScheme="primary"
                             px={'10'}
                             onPress={btnFollow}
@@ -117,3 +118,5 @@ export const Profile = () => {
         </>
     )
 }
+
+export default User

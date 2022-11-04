@@ -1,19 +1,29 @@
 import React from "react";
-import { NativeBaseProvider } from "native-base"; 
-import { NavigationContainer } from "@react-navigation/native";
+import { NativeBaseProvider } from "native-base";
+import { NavigationContainer, NavigatorScreenParams, RouteProp, TabActions } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Main } from "./components/Main";
+import Home from "./components/Home";
+import User from "./components/User";
+import Enlarge from "./components/Enlarge";
+import { StackParamListBase } from "./types";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamListBase>();
 
+ 
 export default function App() {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator >
-          <Stack.Screen name="Main" options={{ headerShown: false }} component={Main} />
-        </Stack.Navigator> 
+        <Stack.Navigator>
+          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+          <Stack.Screen name="User" options={{ headerShadowVisible: false }} component={User} />
+          <Stack.Screen name="Enlarge" options={{headerShadowVisible: false}} component={Enlarge} />
+        </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
   );
 }
+
+
+
+
