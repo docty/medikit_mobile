@@ -3,68 +3,95 @@ import { IGalleryCollection, IUser } from "../types";
 export const gallery: Record<string, IGalleryCollection> = {
 
     '450943jklglmkwlerlt5l': {
-        name: 'decimalvalues',
-        uuid: '450943jklglmkwlerlt5l',
+        username: 'decimalvalues',
+        uid: '450943jklglmkwlerlt5l',
         src: {
             'MReddg': {
-                likes: '200',
-                uuid: 'MReddg',
-                comments: '25.3k',
+                likes: {
+                    '450943jklglmkwlerlt5l': true,
+                    '43o0985609wiergportjwpre': true
+                },
+                uid: 'MReddg',
+                comments: {
+                    'wqertds': {
+                        uid: 'wqertds',
+                        username: 'decimalvalues',
+                        message: 'I really love this design',
+                    },
+                    'mxmvbksd': {
+                        uid: 'mxmvbksd',
+                        username: 'person',
+                        message: 'This material is very beautiful',
+                    }
+                },
                 upload: {
                     'fillp': {
-                        uuid: 'fillp',
+                        uid: 'fillp',
                         uri: 'https://i.pinimg.com/originals/1a/78/d9/1a78d960645f64e5f27f2d08a75f12fc.png'
                     },
                     'poi': {
-                        uuid: 'poi',
+                        uid: 'poi',
                         uri: 'https://i.pinimg.com/originals/9d/f8/fe/9df8fe92add624b7a4cfb59945502233.jpg'
                     },
                     'dsg': {
-                        uuid: 'dsg',
+                        uid: 'dsg',
                         uri: 'https://dezangozone.com/wp-content/uploads/2019/04/ankara.jpg'
                     },
                 }
             },
             'mnmn': {
-                likes: '123',
-                uuid: 'mnmn',
-                comments: '25.3k',
+                likes: {},
+                uid: 'mnmn',
+                comments: {},
                 upload: {
                     'fillp': {
-                        uuid: 'fillp',
+                        uid: 'fillp',
                         uri: 'https://outfittrends.b-cdn.net/wp-content/uploads/2021/03/D5_PADGWAAAdSmO-400x500.jpeg',
                     },
                     'poi': {
-                        uuid: 'poi',
+                        uid: 'poi',
                         uri: 'https://theglossychic.com/wp-content/uploads/2019/11/20191110_001641.jpg',
                     },
                     'dsg': {
-                        uuid: 'dsg',
-                        uri:  'https://i.pinimg.com/736x/6d/34/9c/6d349c286bfb9fc1dc4863590278545b.jpg',
+                        uid: 'dsg',
+                        uri: 'https://i.pinimg.com/736x/6d/34/9c/6d349c286bfb9fc1dc4863590278545b.jpg',
                     },
                 }
             }
         }
     },
     '43o0985609wiergportjwpre': {
-        name: 'person',
-        uuid: '43o0985609wiergportjwpre',
+        username: 'person',
+        uid: '43o0985609wiergportjwpre',
         src: {
             'Rewdas': {
-                likes: '140',
-                uuid: 'Rewdas',
-                comments: '13.9k',
+                likes: {
+                    '43o0985609wiergportjwpre': true
+                },
+                uid: 'Rewdas',
+                comments: {
+                    'vmfsklgk': {
+                        uid: 'vmfsklgk',
+                        username: 'decimalvalues',
+                        message: 'I really love this design',
+                    },
+                    'porwiow': {
+                        uid: 'porwiow',
+                        username: 'person',
+                        message: 'This material is very beautiful',
+                    }
+                },
                 upload: {
                     'qwew': {
-                        uuid: 'qwew',
+                        uid: 'qwew',
                         uri: 'https://i.pinimg.com/originals/47/3b/47/473b47b3a1b58a992e7b2e2a5c75b52c.jpg'
                     },
                     'hghg': {
-                        uuid: 'hghg',
+                        uid: 'hghg',
                         uri: 'https://i.pinimg.com/originals/9d/f8/fe/9df8fe92add624b7a4cfb59945502233.jpg'
                     },
                     'iyut': {
-                        uuid: 'iyut',
+                        uid: 'iyut',
                         uri: 'https://i.pinimg.com/736x/33/17/2a/33172a47b1bce15024891a3278c99e26.jpg'
                     },
                 }
@@ -76,32 +103,42 @@ export const gallery: Record<string, IGalleryCollection> = {
 };
 
 export const user: IUser = {
-    '450943jklglmkwlerlt5l' : {
-        uuid: '450943jklglmkwlerlt5l',
+    '450943jklglmkwlerlt5l': {
+        uid: '450943jklglmkwlerlt5l',
         email: 'decimalvalues@gmail.com',
         displayImage: 'https://netstorage-tuko.akamaized.net/images/a91eb71fd624f490.jpg',
-        followers: '45',
-        name: 'decimalvalues',
-        following: '12.7k'
+        username: 'decimalvalues',
+        fullName: 'Henry Asiedu',
+        followers: {
+            '43o0985609wiergportjwpre': true
+        },
+        following: {
+            '43o0985609wiergportjwpre': true
+        }
     },
-    '43o0985609wiergportjwpre' : {
-        uuid: '43o0985609wiergportjwpre',
+    '43o0985609wiergportjwpre': {
+        uid: '43o0985609wiergportjwpre',
         email: 'person@gmail.com',
         displayImage: 'https://i.pinimg.com/736x/e3/bb/13/e3bb132ceb1b9945291900281fcdd35b.jpg',
-        followers: '675',
-        name: 'person',
-        following: '98k'
+        username: 'person',
+        fullName: 'Elsie Aikins',
+        followers: {
+            '43o0985609wiergportjwpre': true
+        },
+        following: {
+            '43o0985609wiergportjwpre': true
+        }
     }
 }
- 
+
 // '9035j0tjw0emsrjg09wretw3': {
 //     name: 'dafment',
-//     uuid: '9035j0tjw0emsrjg09wretw3',
+//     uid: '9035j0tjw0emsrjg09wretw3',
 //     src: [
 //         {
 //             'Opers': {
 //                 likes: '12',
-//                 uuid: 'Opers',
+//                 uid: 'Opers',
 //                 comments: '54',
 //                 upload: [
 //                     {
@@ -120,12 +157,12 @@ export const user: IUser = {
 // } as IGalleryCollection,
 // '05363jsfgkj24kjkrnwfw': {
 //     name: 'frter',
-//     uuid: '05363jsfgkj24kjkrnwfw',
+//     uid: '05363jsfgkj24kjkrnwfw',
 //     src: [
 //         {
 //             'Resda': {
 //                 likes: '45',
-//                 uuid: 'Resda',
+//                 uid: 'Resda',
 //                 comments: '12.8k',
 //                 upload: [
 //                     {

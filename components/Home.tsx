@@ -17,7 +17,7 @@ const Home = () => {
                 component={Search}
                 options={{
                     tabBarIcon: () => <Icon as={AntDesign} name="search1" size={'lg'} />,
-                    title: 'Docty',
+                    title: 'Search',
                     tabBarLabel: 'Search',
 
                 }}
@@ -27,7 +27,7 @@ const Home = () => {
                 component={Gallery}
                 options={{
                     tabBarIcon: () => <Icon as={AntDesign} name="picture" size={'lg'} />,
-                    header: (props) =>  <Box h={StatusBar.currentHeight} rounded="lg"/>,
+                    header: () =>  <Box h={StatusBar.currentHeight} rounded="lg"/>,
 
                 }} />
             <Tab.Screen

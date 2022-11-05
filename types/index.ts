@@ -4,8 +4,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 export type StackParamListBase = {
     Home: undefined
     User: {
-        name: string
-        uuid: string
+        username: string
+        uid: string
     }
     Enlarge: {
         user: string
@@ -20,38 +20,44 @@ export type UserRouterProp = RouteProp<StackParamListBase, 'User'>
 export type EnlargeRouterProp = RouteProp<StackParamListBase, 'Enlarge'>
 
 export interface IGallery {
-    name: string;
-    uuid: string;
+    username: string;
+    uid: string;
     src: ISrc,
 }
 
 export interface IGalleryCollection {
-    name: string;
-    uuid: string;
+    username: string;
+    uid: string;
     src: Record<string, ISrc>,
 }
 
 export interface ISrc {
-    likes: string;
-    uuid: string;
-    comments: string;
+    likes: Record<string, boolean>;
+    uid: string;
+    comments: Record<string, IComments>;
     upload: Record<string, IUpload>;
 }
 
+interface IComments {
+    uid: string;
+    username: string;
+    message: string
+}
 interface IUpload {
     uri: string
-    uuid: string
+    uid: string
 }
 
 export type IUser= Record<string, IUserData>;
 
 export interface IUserData {
-    uuid: string
+    uid: string
     email: string
-    name: string
+    username: string
+    fullName: string;
     displayImage: string
-    followers: string
-    following: string
+    followers: Record<string, boolean>
+    following: Record<string, boolean>
 }
 
 

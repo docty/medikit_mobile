@@ -1,6 +1,6 @@
 import React from "react";
 import { NativeBaseProvider } from "native-base";
-import { NavigationContainer, NavigatorScreenParams, RouteProp, TabActions } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./components/Home";
 import User from "./components/User";

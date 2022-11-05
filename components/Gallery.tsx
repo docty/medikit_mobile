@@ -1,16 +1,11 @@
-import { Flex, HStack, Avatar, Text, Image, Container, Box, Icon, Center, VStack, ScrollView, AspectRatio, ZStack, Pressable } from "native-base";
+import { HStack, Avatar, Text, Image, Box, Icon, Center, ScrollView, ZStack, Pressable } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
-import React, { Children, useState, useEffect } from "react";
-import { Dimensions, PixelRatio } from 'react-native'
+import React, { Children, useState } from "react";
+import { useWindowDimensions } from 'react-native'
 import { gallery } from '../utils/galleryData'
-import { NavigationAction, NavigationProp, NavigationState, useNavigation, useNavigationState, useRoute, } from "@react-navigation/native";
-import { NativeScreen } from "react-native-screens";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-//import { DetailsScreenRouterProp, HomeScreenNavigationProp } from "../App";
+import { useNavigation, } from "@react-navigation/native";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { HomeScreenNavigationProp, IGallery } from "../types";
-
-const { height } = Dimensions.get('window')
 
 
 
@@ -18,40 +13,43 @@ const { height } = Dimensions.get('window')
 export const Gallery = () => {
     const data = Object.values(gallery);
 
-    
+
+
+
+
     return (
         <ScrollView>
             {
                 Children.toArray(data.map(item => (
                     Children.toArray(Object.values(item.src).map(value => <Thumbnail
-                        name={item.name}
-                        uuid={item.uuid}
+                        username={item.username}
+                        uid={item.uid}
                         src={value} />)))
-
                 ))
             }
         </ScrollView >
     )
 }
-  
 
 
-const Thumbnail = ({ name, uuid, src }: IGallery) => {
 
-    
+const Thumbnail = ({ username, uid, src }: IGallery) => {
+
+    const { height } = useWindowDimensions();
     const { comments, likes, upload } = src;
 
     const up = Object.values(upload);
 
     const [state, setState] = useState<string>(up[0].uri);
-    
+    const [like, setLike] = useState<boolean>(false);
+
     const navigation = useNavigation<HomeScreenNavigationProp>();
 
     const currentHeight = height - useBottomTabBarHeight()
 
-    const btnTitleClick = (name: string, uuid: string) => {
+    const btnTitleClick = (username: string, uid: string) => {
         console.log('btnTitleClick');
-        navigation.navigate('User', { name, uuid })
+        navigation.navigate('User', { username, uid })
     }
 
     const btnDownloadClick = () => {
@@ -65,6 +63,7 @@ const Thumbnail = ({ name, uuid, src }: IGallery) => {
     }
 
     const btnLikeClick = () => {
+        setLike(p => !p);
         console.log('btnLikeClick');
 
     }
@@ -82,7 +81,7 @@ const Thumbnail = ({ name, uuid, src }: IGallery) => {
                     />
                 </Center>
                 <Box px={'4'} width={'full'} display={'flex'} flexDirection="row" justifyContent={'space-between'} alignItems={'center'} p={'2'}>
-                    <Pressable onPress={() => btnTitleClick(name, uuid)}  >
+                    <Pressable onPress={() => btnTitleClick(username, uid)}  >
                         <HStack space="1" alignItems="center">
                             <Avatar
                                 source={{
@@ -90,7 +89,7 @@ const Thumbnail = ({ name, uuid, src }: IGallery) => {
                                 }}
                                 size={'sm'}
                             />
-                            <Text fontSize="md" color={'white'} fontWeight={'bold'}>@{name}</Text>
+                            <Text fontSize="md" color={'white'} fontWeight={'bold'}>@{username}</Text>
                         </HStack>
                     </Pressable>
                     <Pressable onPress={btnDownloadClick}>
@@ -103,7 +102,7 @@ const Thumbnail = ({ name, uuid, src }: IGallery) => {
                             <Avatar bgColor={'white'} size={'sm'}>
                                 <Icon as={AntDesign} name="like1" size={'md'} />
                             </Avatar>
-                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{likes}</Text>
+                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(likes).length}</Text>
                         </Center>
                     </Pressable>
                     <HStack space="1" alignItems="center">
@@ -131,9 +130,9 @@ const Thumbnail = ({ name, uuid, src }: IGallery) => {
                     <Pressable onPress={btnLikeClick} >
                         <Center>
                             <Avatar bgColor={'white'} size={'sm'}>
-                                <Icon as={AntDesign} name="heart" size={'lg'} />
+                                <Icon as={AntDesign} name="heart" size={'lg'} color={`${like && 'red.500'}`} />
                             </Avatar>
-                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{comments}</Text>
+                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(comments).length}</Text>
                         </Center>
                     </Pressable>
                 </HStack>

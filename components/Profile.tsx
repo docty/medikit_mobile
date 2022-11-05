@@ -1,5 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider, Box, Pressable } from "native-base";
+import { isEmpty } from "ramda";
 import React, { Children, useEffect, useState } from "react";
 import { HomeScreenNavigationProp, UserRouterProp, ISrc, IUserData } from "../types";
 import { gallery, user } from "../utils/galleryData";
@@ -16,21 +17,21 @@ export const Profile = () => {
     const userData = Object.values(user);
 
     useEffect(() => {
-        const ad = galleryData.find(value => value.uuid === '450943jklglmkwlerlt5l');
+        const ad = galleryData.find(value => value.uid === '450943jklglmkwlerlt5l');
         const as = Object.values(ad!.src)
         setResponse(as)
     }, [])
 
     useEffect(() => {
-        const ad = userData.find(value => value.uuid === '450943jklglmkwlerlt5l');
+        const ad = userData.find(value => value.uid === '450943jklglmkwlerlt5l');
         setIndividual(ad!)
 
     }, [])
 
-    const btnOnEnlarge = (srcUuid: string, uploadUuid: string) => {
-        console.log(srcUuid, uploadUuid);
+    const btnOnEnlarge = (srcuid: string, uploaduid: string) => {
+        console.log(srcuid, uploaduid);
 
-        navigation.navigate('Enlarge', { user: individual.uuid, src: srcUuid, upload: uploadUuid })
+        navigation.navigate('Enlarge', { user: individual.uid, src: srcuid, upload: uploaduid })
 
     }
     const btnFollow = () => {
@@ -51,11 +52,11 @@ export const Profile = () => {
                     source={{ uri: individual.displayImage }}
                     size={'2xl'}
                 />
-                <Text fontSize="sm" fontWeight={'medium'}>@{individual?.name}</Text>
+                <Text fontSize="sm" fontWeight={'medium'}>@{individual?.username}</Text>
                 <HStack space="4"  >
-                    <Text fontSize="sm" color={'blueGray.700'}>{individual.followers} followers</Text>
+                    <Text fontSize="sm" color={'blueGray.700'}>{isEmpty(individual) || Object.values(individual.followers).length} followers</Text>
                     <Divider orientation="vertical" />
-                    <Text fontSize="sm">{individual.following} following</Text>
+                    <Text fontSize="sm">{isEmpty(individual) || Object.values(individual.following).length} following</Text>
                 </HStack>
                 <VStack pb={'3'}>
                     {
@@ -90,7 +91,7 @@ export const Profile = () => {
                                 <Center flexGrow={'1'} flexBasis={'150'} px={'1'} py={'2'}>
                                     <Pressable
                                         p="1"
-                                        onPress={() => btnOnEnlarge(item.uuid, vv.uuid)}
+                                        onPress={() => btnOnEnlarge(item.uid, vv.uid)}
                                     >
 
                                         <Image
