@@ -5,3 +5,5 @@
 
 react-native-screens
 react-native-safe-area-context
+
+ eas build -p android --profile preview
