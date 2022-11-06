@@ -1,107 +1,55 @@
-import { AntDesign } from "@expo/vector-icons"
-import { createBottomTabNavigator, useBottomTabBarHeight } from "@react-navigation/bottom-tabs"
-import { Actionsheet, Box, Button, Text, Fab, Image, FlatList, Icon, Menu, Modal, Popover, Slide, Slider, StatusBar, Divider, Spinner, Pressable, Avatar, Center, HStack, ZStack, } from "native-base"
-import React, { Children, useEffect, useState } from "react"
-import { Main } from "./Main"
-import { Profile } from "./Profile"
-import { Search } from "./Search"
-import { QueryFunctionContext, useInfiniteQuery, useQuery } from 'react-query';
-import { getLength, getRandomKey, getRandomNumber, getSingleData } from "../utils/firebase-adapter"
-import { isEmpty, keys } from "ramda" 
-import { HomeScreenNavigationProp, IGallery, ISrc } from "../types"
-import { useNavigation } from "@react-navigation/native"
-import { useWindowDimensions } from "react-native"
+import { HStack, Avatar, Text, Image, Box, Icon, Center, ScrollView, ZStack, Pressable } from "native-base";
+import { AntDesign } from "@expo/vector-icons";
+import React, { Children, useState } from "react";
+import { useWindowDimensions } from 'react-native'
+import { gallery } from '../utils/galleryData'
+import { useNavigation, } from "@react-navigation/native";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { HomeScreenNavigationProp, IGallery } from "../types";
 
 
 
-export const Tester = () => {
+
+export const Gallery = () => {
+    const data = Object.values(gallery);
+
+ 
 
 
 
-    const fetchAllGames = ({ pageParam = getRandomKey(getLength()) }: QueryFunctionContext) => {
-
-        const dad = getSingleData(pageParam)
-
-        return Promise.resolve(dad)
-    }
-
-
-    const { data, fetchNextPage, isSuccess } = useInfiniteQuery({
-        queryKey: ['personal'],
-        queryFn: fetchAllGames,
-    })
-
-    useEffect(() => {
-        console.log(data?.pages, isSuccess);
-    }, [data])
-
-
-
-    const onCli = () => {
-        const length = getLength();
-        const pageParam = getRandomKey(length)
-
-        fetchNextPage({ pageParam });
-
-    }
-
-    if (isSuccess) {
-        return (
-            <Box flex={1} safeAreaTop backgroundColor='white'>
-                <Box height={16} justifyContent={'center'} px={2}>
-                    <Text fontSize={28} fontWeight={'600'} color={'emerald.500'}>
-                        Explore Games
-                    </Text>
-                   
-                    {
-                        Children.toArray(data?.pages.map((item, index) => {
-                            const key = keys(item)[0];
-                            const { username, uid, src } = item[key];
-                            const values = Object.values(src)[0] as ISrc; 
-                            return (
-                                <Thumbnail username={username} uid={uid} src={values}  />
-                                
-                                    
-
-                            )
-
-
-                        }))
-                    }
-                </Box>
-                <Pressable
-                        p="2"
-                        borderWidth="1"
-                        onPress={onCli}
-                        position={'fixed'}
-                    >
-                        <Text>Hello World!</Text>
-                    </Pressable>
-
-            </Box>
-        );
-    } else {
-        <Text fontSize="xs">Now Loading</Text>
-
-    }
+    return (
+        <ScrollView  >
+            {
+                Children.toArray(data.map(item => (
+                    Children.toArray(Object.values(item.src).map(value => <Thumbnail
+                        username={item.username}
+                        uid={item.uid}
+                        src={value} />))
+                        
+                )))
+            }
+        </ScrollView >
+    )
 }
 
 
-const Thumbnail = ({ username, uid, src }: IGallery) => {
 
-    // const { height } = useWindowDimensions();
-     const { comments, likes, upload } = src;
+ const Thumbnail = ({ username, uid, src }: IGallery) => {
 
-     const up = Object.values(upload);
+    const { height } = useWindowDimensions();
+    const { comments, likes, upload } = src;
+
+    const up = Object.values(upload);
 
     const [state, setState] = useState<string>(up[0].uri);
     const [like, setLike] = useState<boolean>(false);
 
     const navigation = useNavigation<HomeScreenNavigationProp>();
 
-    // const currentHeight = height - useBottomTabBarHeight()
+    const currentHeight = height - useBottomTabBarHeight()
 
     const btnTitleClick = (username: string, uid: string) => {
+        
         console.log('btnTitleClick');
         navigation.navigate('User', { username, uid })
     }
@@ -124,9 +72,9 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
 
 
     return (
-        <Box  bg={'black'} height={'full'} borderBottomWidth={'1'} borderBottomColor={'gray.800'}>
-        
-                <Center height={800 - 80} w={'full'} >
+        <Box  bg={'darkBlue.900'} height={currentHeight} borderBottomWidth={'1'} borderBottomColor={'gray.800'}>
+            <ZStack>
+                <Center height={currentHeight - 80} w={'full'} >
                     <Image
                         source={{ uri: state }}
                         alt="Alternate Text"
@@ -150,7 +98,7 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
                         <Icon as={AntDesign} name="download" size={'md'} color={'white'} fontWeight={'bold'} />
                     </Pressable>
                 </Box>
-                <HStack px={'4'} mt={200 - 70} w={'full'} space="3" alignItems={'center'} justifyContent={'space-between'}>
+                <HStack px={'4'} mt={currentHeight - 70} w={'full'} space="3" alignItems={'center'} justifyContent={'space-between'}>
                     <Pressable onPress={btnCommentClick} >
                         <Center>
                             <Avatar bgColor={'white'} size={'sm'}>
@@ -189,8 +137,10 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
                             <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(comments).length}</Text>
                         </Center>
                     </Pressable>
-                </HStack> 
-            
+                </HStack>
+            </ZStack>
         </Box >
     )
 }
+
+

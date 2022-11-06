@@ -6,21 +6,29 @@ import Home from "./components/Home";
 import User from "./components/User";
 import Enlarge from "./components/Enlarge";
 import { StackParamListBase } from "./types";
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { StatusBar } from "expo-status-bar";
+import { Tester } from "./components/Tester";
 
 const Stack = createNativeStackNavigator<StackParamListBase>();
+const queryClient = new QueryClient();
 
- 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
-          <Stack.Screen name="User" options={{ headerShadowVisible: false }} component={User} />
-          <Stack.Screen name="Enlarge" options={{headerShadowVisible: false}} component={Enlarge} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <>
+      <StatusBar style='auto' />
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <QueryClientProvider client={queryClient}>
+            <Stack.Navigator>
+              <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+              <Stack.Screen name="User" options={{ headerShadowVisible: false }} component={User} />
+              <Stack.Screen name="Enlarge" options={{ headerShadowVisible: false }} component={Enlarge} />
+            </Stack.Navigator>
+          </QueryClientProvider>
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </>
   );
 }
 
