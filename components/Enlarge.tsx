@@ -14,18 +14,13 @@ import { gallery } from '../utils/galleryData'
 const Enlarge = () => {
 
     const { params } = useRoute<EnlargeRouterProp>();
-    const [image, setImage] = useState<string>('No Image');
-    useEffect(() => {
 
-        setImage(gallery[params.user].src[params.src].upload[params.upload].uri);
-
-    }, [])
 
     return (
         <Box p="2" bg={'white'}>
             <Image
                 source={{
-                    uri: image
+                    uri: params.uri
                 }}
                 alt="Alternate Text"
                 size="full"

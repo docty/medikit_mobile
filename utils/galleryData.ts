@@ -27,7 +27,7 @@ export const gallery: Record<string, IGalleryCollection> = {
                 upload: {
                     'fillp': {
                         uid: 'fillp',
-                        uri: 'https://i.pinimg.com/originals/1a/78/d9/1a78d960645f64e5f27f2d08a75f12fc.png'
+                        uri: 'https://outfittrends.b-cdn.net/wp-content/uploads/2021/03/D5_PADGWAAAdSmO-400x500.jpeg',
                     },
                     'poi': {
                         uid: 'poi',
@@ -35,7 +35,7 @@ export const gallery: Record<string, IGalleryCollection> = {
                     },
                     'dsg': {
                         uid: 'dsg',
-                        uri: 'https://dezangozone.com/wp-content/uploads/2019/04/ankara.jpg'
+                        uri: 'https://d17a17kld06uk8.cloudfront.net/products/43VMDHH/CH3TJT57-default.jpg',
                     },
                 },
                 tag: 'Outing'
@@ -47,11 +47,11 @@ export const gallery: Record<string, IGalleryCollection> = {
                 upload: {
                     'fillp': {
                         uid: 'fillp',
-                        uri: 'https://outfittrends.b-cdn.net/wp-content/uploads/2021/03/D5_PADGWAAAdSmO-400x500.jpeg',
+                        uri: 'https://theglossychic.com/wp-content/uploads/2019/11/20191110_001641.jpg',
                     },
                     'poi': {
                         uid: 'poi',
-                        uri: 'https://theglossychic.com/wp-content/uploads/2019/11/20191110_001641.jpg',
+                        uri: 'https://i.pinimg.com/564x/82/92/b5/8292b56c3eb975ab9356b85eb1160716.jpg',
                     },
                     'dsg': {
                         uid: 'dsg',
@@ -84,23 +84,84 @@ export const gallery: Record<string, IGalleryCollection> = {
                     }
                 },
                 upload: {
-                    'qwew': {
-                        uid: 'qwew',
-                        uri: 'https://i.pinimg.com/originals/47/3b/47/473b47b3a1b58a992e7b2e2a5c75b52c.jpg'
+                    'fhre': {
+                        uid: 'fhre',
+                        uri: 'https://global2019-static-cdn.kikuu.com/upload-productImg-1583384640756.jpeg?x-oss-process=style/p85',
                     },
-                    'hghg': {
-                        uid: 'hghg',
-                        uri: 'https://i.pinimg.com/originals/9d/f8/fe/9df8fe92add624b7a4cfb59945502233.jpg'
+                    'iyuoi': {
+                        uid: 'iyuoi',
+                        uri: 'https://i0.wp.com/youstylezcollections.com/wp-content/uploads/2020/11/FB_IMG_16046429091841874.jpg?resize=720%2C720&ssl=1',
                     },
-                    'iyut': {
-                        uid: 'iyut',
+                    'kjgfhds': {
+                        uid: 'kjgfhds',
                         uri: 'https://i.pinimg.com/736x/33/17/2a/33172a47b1bce15024891a3278c99e26.jpg'
                     },
                 },
                 tag: 'Wedding'
             }
         }
-    }
+    },
+    '9035j0tjw0emsrjg09wretw3': {
+        username: 'adomic',
+        uid: '9035j0tjw0emsrjg09wretw3',
+        src: {
+            'jmgsaa': {
+                likes: {
+                    '450943jklglmkwlerlt5l': true,
+                    '43o0985609wiergportjwpre': true,
+                    '9035j0tjw0emsrjg09wretw3': true
+                },
+                uid: 'jmgsaa',
+                comments: {
+                    'wqertds': {
+                        uid: 'wqertds',
+                        username: 'decimalvalues',
+                        message: 'I really love this design',
+                    },
+                    'mxmvbksd': {
+                        uid: 'mxmvbksd',
+                        username: 'person',
+                        message: 'This material is very beautiful',
+                    }
+                },
+                upload: {
+                    'fillp': {
+                        uid: 'fillp',
+                        uri: 'https://i.pinimg.com/736x/e3/bb/13/e3bb132ceb1b9945291900281fcdd35b.jpg',
+                    },
+                    'poi': {
+                        uid: 'poi',
+                        uri: 'https://i.pinimg.com/originals/1a/78/d9/1a78d960645f64e5f27f2d08a75f12fc.png'
+                    },
+                    'dsg': {
+                        uid: 'dsg',
+                        uri: 'https://clipkulture.com/wp-content/uploads/2020/04/158782323848kgn.jpg',
+                    },
+                },
+                tag: 'Outing'
+            },
+            'pouiyutyre': {
+                likes: {},
+                uid: 'pouiyutyre',
+                comments: {},
+                upload: {
+                    'fillp': {
+                        uid: 'fillp',
+                        uri: 'https://netstorage-tuko.akamaized.net/images/a91eb71fd624f490.jpg',
+                    },
+                    'poi': {
+                        uid: 'poi',
+                        uri:   'https://i.pinimg.com/564x/50/23/d3/5023d3ab7186c23d12156acca31a4479.jpg',
+                    },
+                    'dsg': {
+                        uid: 'dsg',
+                        uri: 'https://i.pinimg.com/originals/f0/31/fc/f031fcc150866ef593f93274c6743de1.jpg',
+                    },
+                },
+                tag: 'Wedding'
+            }
+        }
+    },
 
 
 };
@@ -122,11 +183,25 @@ export const user: IUser = {
     '43o0985609wiergportjwpre': {
         uid: '43o0985609wiergportjwpre',
         email: 'person@gmail.com',
-        displayImage: 'https://i.pinimg.com/736x/e3/bb/13/e3bb132ceb1b9945291900281fcdd35b.jpg',
+        displayImage: 'https://stylerave.com/wp-content/uploads/2020/07/C8413117-646A-4FAF-8B91-59C55DA10EE4.jpeg',
         username: 'person',
         fullName: 'Elsie Aikins',
         followers: {
+            '450943jklglmkwlerlt5l': true
+        },
+        following: {
             '43o0985609wiergportjwpre': true
+        }
+    },
+    '9035j0tjw0emsrjg09wretw3': {
+        uid: '9035j0tjw0emsrjg09wretw3',
+        email: 'adomic@gmail.com',
+        displayImage: 'https://dezangozone.com/wp-content/uploads/2018/09/aso2Bebi2Bmaboplus.jpg',
+        username: 'adomic',
+        fullName: 'Adom Bright',
+        followers: {
+            '43o0985609wiergportjwpre': true,
+            '450943jklglmkwlerlt5l': true,
         },
         following: {
             '43o0985609wiergportjwpre': true

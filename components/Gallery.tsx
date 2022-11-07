@@ -1,60 +1,54 @@
-import { HStack, Avatar, Text, Image, Box, Icon, Center, ScrollView, FlatList, ZStack, Pressable } from "native-base";
-import { AntDesign } from "@expo/vector-icons";
-import React, { Children, useState, useEffect } from "react";
-import { ListRenderItem, ListRenderItemInfo, useWindowDimensions, ActivityIndicator, Dimensions, StatusBar } from 'react-native'
-import { gallery } from '../utils/galleryData'
-import { useNavigation, } from "@react-navigation/native";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { HomeScreenNavigationProp, IGallery, ISrc } from "../types";
+import React, { } from "react";
+import { ActivityIndicator, SafeAreaView } from 'react-native'
+import { ISrc } from "../types";
 import { QueryFunctionContext, useInfiniteQuery } from "react-query";
 import { getRandomKey, getLength, getSingleData } from "../utils/firebase-adapter";
 import { keys } from "ramda";
 import Thumbnail from "./Thumbnail";
+import { FlashList } from "@shopify/flash-list";
 
 
 
 
 export const Gallery = () => {
 
-    const { height } = useWindowDimensions();
-
     const queryMyDatabase = ({ pageParam = getRandomKey(getLength()) }: QueryFunctionContext) => {
-
         const response = getSingleData(pageParam)
 
         return Promise.resolve(response)
     }
 
-    const { data, fetchNextPage, isFetching } = useInfiniteQuery({
+
+
+    const { data, fetchNextPage, isFetching, isSuccess } = useInfiniteQuery({
         queryKey: ['gallery'],
         queryFn: queryMyDatabase
     })
 
 
-    useEffect(() => {
-        // console.log(data?.pages);
 
-
-    }, [data]);
-
-
-    const renderItem = ({ item }: ListRenderItemInfo<any>) => {
+    const renderItem = ({ item, index }: any) => {
         const key = keys(item)[0];
 
         const { username, uid, src } = item[key];
         const values = Object.values(src)[0] as ISrc;
 
 
-        return (
-            <Thumbnail username={username} uid={uid} src={values} />
 
-        )
+
+        if (isSuccess)
+            return (
+                <Thumbnail username={username} uid={uid} src={values} />
+            )
+        else return null
     }
+
 
 
     const loadMore = () => {
         const length = getLength();
         const pageParam = getRandomKey(length)
+
 
         fetchNextPage({ pageParam });
 
@@ -63,17 +57,21 @@ export const Gallery = () => {
 
 
     return (
-        <FlatList
-            data={data?.pages}
-            renderItem={renderItem}
-            initialNumToRender={4}
-            onEndReached={loadMore}
-            onEndReachedThreshold={20}
-            keyExtractor={(item, index) => index.toString()}
-            pagingEnabled={true}
-            ListFooterComponent={isFetching ? null : <ActivityIndicator />}
+        <SafeAreaView>
+            <FlashList
+                data={data?.pages}
+                renderItem={renderItem}
+                estimatedItemSize={200}
+                onEndReached={loadMore}
+                onEndReachedThreshold={0.5}
+                keyExtractor={(item, index) => index.toString()}
+                pagingEnabled={true}
+                refreshing={false}
 
-        />
+                onRefresh={loadMore}
+                ListFooterComponent={isFetching ? null : <ActivityIndicator />}
+            />
+        </SafeAreaView>
 
     )
 }

@@ -6,10 +6,13 @@ import { Profile } from "./Profile";
 import { Search } from "./Search";
 import { AntDesign } from "@expo/vector-icons";
 import { StatusBar } from "react-native";
+import { Account } from "./Account";
 
 const Tab = createBottomTabNavigator()
 
 const Home = () => {
+    const sessionState = '';
+
     return (
         <Tab.Navigator initialRouteName="Gallery" >
             <Tab.Screen
@@ -27,15 +30,30 @@ const Home = () => {
                 component={Gallery}
                 options={{
                     tabBarIcon: () => <Icon as={AntDesign} name="picture" size={'lg'} />,
-                    header: () =>  <Box h={StatusBar.currentHeight} rounded="lg"/>,
+                    header: () => <Box h={StatusBar.currentHeight} rounded="lg" />,
 
                 }} />
-            <Tab.Screen
-                name={'Profile'}
-                component={Profile}
-                options={{
-                    tabBarIcon: () => <Icon as={AntDesign} name="user" size={'lg'} />
-                }} />
+            {
+                sessionState ? (
+                    <Tab.Screen
+                        name={'Profile'}
+                        component={Profile}
+                        options={{
+                            headerShown: false,
+                            tabBarIcon: () => <Icon as={AntDesign} name="user" size={'lg'} />
+                        }} />
+                ) : (
+                    <Tab.Screen
+                        name={'Account'}
+                        component={Account}
+                        options={{
+                            headerShown: false,
+                            tabBarIcon: () => <Icon as={AntDesign} name="user" size={'lg'} />
+                        }} />
+
+                )
+            }
+
         </Tab.Navigator>
     );
 }

@@ -2,18 +2,21 @@ import { AntDesign } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { Box, ZStack, Center, HStack, Avatar, Icon, Image, Text } from "native-base";
-import React, { Children, memo, useState } from "react";
+import { isEmpty, length } from "ramda";
+import React, { Children, useEffect, useState } from "react";
 import { Pressable, useWindowDimensions } from "react-native";
-import { IGallery, HomeScreenNavigationProp } from "../types";
-
+import { IGallery, HomeScreenNavigationProp, IUpload } from "../types";
+ 
 const Thumbnail = ({ username, uid, src }: IGallery) => {
+
+
 
     const { height } = useWindowDimensions();
     const { comments, likes, upload } = src;
 
     const up = Object.values(upload);
 
-    const [state, setState] = useState<string>(up[0].uri);
+    const [state, setState] = useState<string>('');
     const [like, setLike] = useState<boolean>(false);
 
     const navigation = useNavigation<HomeScreenNavigationProp>();
@@ -21,8 +24,6 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
     const currentHeight = height - useBottomTabBarHeight()
 
     const btnTitleClick = (username: string, uid: string) => {
-
-        console.log('btnTitleClick');
         navigation.navigate('User', { username, uid })
     }
 
@@ -42,7 +43,16 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
 
     }
 
+    useEffect(() => {
+        // setState(up[0].uri)
+        
 
+    }, [state])
+
+    // console.log('----', username); 
+  
+
+    // return  <Text fontSize="md" color={'black'} height={height} fontWeight={'bold'}>@{up[length(up)-1].uri}</Text>
     return (
         <Box bg={'darkBlue.900'} height={currentHeight} borderBottomWidth={'1'} borderBottomColor={'gray.800'}>
             <ZStack>
@@ -53,8 +63,15 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
                         size={'full'}
                         resizeMode={'contain'}
                     />
+                    {/* <Image
+                        source={{ uri: sd }}
+                        alt="Alternate Text"
+                        size={'full'}
+                        resizeMode={'contain'}
+                    /> */}
+
                 </Center>
-                
+
                 <Box px={'4'} width={'full'} display={'flex'} flexDirection="row" justifyContent={'space-between'} alignItems={'center'} p={'2'}>
                     <Pressable onPress={() => btnTitleClick(username, uid)}  >
                         <HStack space="1" alignItems="center">
@@ -81,26 +98,12 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
                         </Center>
                     </Pressable>
                     <HStack space="1" alignItems="center">
-                        {
-                            Children.toArray(up.map(child => (
-                                <Pressable onPress={() => { setState(child.uri) }}  >
-                                    <Center
-                                        borderWidth={'2'}
-                                        borderColor={`${state === child.uri ? 'blue.400' : 'white'}`}
-                                        size={'16'}
-                                    >
-                                        <Image
-                                            source={{ uri: child.uri }}
-                                            alt="Alternate Image"
-                                            style={{ resizeMode: 'contain' }}
-                                            size={'full'}
-                                        />
-                                    </Center>
-                                </Pressable>
+                        <SubImages data={up} output={function (uri: string) {
+                              
+                            //console.log(uri)
+                           setState(uri);
+                        }} />
 
-
-                            )))
-                        }
                     </HStack>
                     <Pressable onPress={btnLikeClick} >
                         <Center>
@@ -117,4 +120,43 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
 }
 
 
-export default memo(Thumbnail);
+interface ISub {
+    data: IUpload[]
+    output: (uri: string) => void
+}
+
+const SubImages = (props: ISub) => {
+
+    const [state, setState] = useState<string>(props.data[0].uri);
+
+    useEffect(() => {
+        //console.log(state);
+        props.output(state)
+
+    }, [state])
+
+    return (
+        <>
+            {Children.toArray(props.data.map(child => (
+                <Pressable onPress={() => { setState(child.uri) }}  >
+                    <Center
+                        borderWidth={'2'}
+                        borderColor={`${state === child.uri ? 'blue.400' : 'white'}`}
+                        size={'16'}
+                    >
+                        <Image
+                            source={{ uri: child.uri }}
+                            alt="Alternate Image"
+                            style={{ resizeMode: 'contain' }}
+                            size={'full'}
+                        />
+                    </Center>
+                </Pressable>
+
+            )))
+            }
+        </>
+    )
+}
+
+export default Thumbnail;

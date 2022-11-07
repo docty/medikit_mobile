@@ -12,7 +12,7 @@ const User = () => {
     const [response, setResponse] = useState<ISrc[]>([] as ISrc[]);
     const [individual, setIndividual] = useState<IUserData>({} as IUserData);
 
- 
+
     const galleryData = Object.values(gallery);
     const userData = Object.values(user);
 
@@ -29,10 +29,9 @@ const User = () => {
 
     }, [])
 
-    const btnOnEnlarge = (srcuid: string, uploaduid: string) => {
-        console.log(srcuid, uploaduid);
+    const btnOnEnlarge = (uri: string) => { 
 
-        navigation.navigate('Enlarge', { user: individual.uid, src: srcuid, upload: uploaduid })
+        navigation.navigate('Enlarge', { uri: uri })
 
     }
     const btnFollow = () => {
@@ -46,14 +45,14 @@ const User = () => {
     }
 
     return (
-        <>  
-            
-            
+        <>
+
+
             <VStack bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'4'}>
                 <Avatar
                     source={{ uri: individual.displayImage }}
                     size={'2xl'}
-                /> 
+                />
                 <Text fontSize="sm" fontWeight={'medium'}>@{individual?.username}</Text>
                 <HStack space="4"  >
                     <Text fontSize="sm" color={'blueGray.700'}>{isEmpty(individual) || Object.values(individual.followers).length} followers</Text>
@@ -88,12 +87,12 @@ const User = () => {
 
                 <Flex w={'full'} flexDirection={'row'} flexWrap={'wrap'} px={'2'}>
                     {
-                         Children.toArray(response!.map(item => (
+                        Children.toArray(response!.map(item => (
                             Children.toArray(Object.values(item.upload).map(vv => (
                                 <Center flexGrow={'1'} flexBasis={'150'} px={'1'} py={'2'}>
                                     <Pressable
                                         p="1"
-                                        onPress={() => btnOnEnlarge(item.uid, vv.uid)}
+                                        onPress={() => btnOnEnlarge(vv.uri)}
                                     >
 
                                         <Image

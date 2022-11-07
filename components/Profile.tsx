@@ -9,37 +9,19 @@ import { useQueries } from "react-query";
 import { HomeScreenNavigationProp, IUpload } from "../types";
 import { getIndividualData, getIndividualUser } from "../utils/firebase-adapter";
 import { ITEM_WIDTH, SLIDER_WIDTH } from "./Search";
+import ViewImage from "./ViewImage";
 
 
-const CarouselCardItem = ({ item, index }: { item: IUpload, index: number }) => {
 
-    return (
-        <Center flexGrow={'1'} flexBasis={'150'} py={'2'}>
-            <Pressable onPress={() => console.log(item.uid)}>
-
-                <Image
-                    source={{ uri: item.uri }}
-                    alt="Alternate Text"
-                    size={'300'}
-                    resizeMethod={'resize'}
-                    resizeMode={'cover'}
-                />
-            </Pressable>
-
-        </Center>
-
-
-    )
-}
 
 export const Profile = () => {
 
-    const navigation = useNavigation<HomeScreenNavigationProp>()
 
     const getProfile = () => {
         const response = getIndividualData('450943jklglmkwlerlt5l')
         return Promise.resolve(response);
     }
+
 
     const getUser = () => {
         const response = getIndividualUser('450943jklglmkwlerlt5l')
@@ -51,17 +33,6 @@ export const Profile = () => {
         { queryKey: 'profile', queryFn: getProfile },
         { queryKey: 'user', queryFn: getUser }
     ])
-
-
-
-
-    const btnOnEnlarge = (srcuid: string, uploaduid: string) => {
-        console.log(srcuid, uploaduid);
-
-        navigation.navigate('Enlarge', { user: user.data?.uid!, src: srcuid, upload: uploaduid })
-
-    }
-
 
 
     const btnUpload = () => {
@@ -145,4 +116,14 @@ export const Profile = () => {
     }
 
 
+}
+
+
+const CarouselCardItem = ({ item, index }: { item: IUpload, index: number }) => {
+
+
+    return (
+        <ViewImage {...item} />
+
+    )
 }

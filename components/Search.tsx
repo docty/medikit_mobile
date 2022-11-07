@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { fetchByTag } from "../utils/firebase-adapter";
 import { useQueries } from "react-query";
 import { values } from "ramda";
+import ViewImage from "./ViewImage";
 
 
 
@@ -15,27 +16,14 @@ export const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = 200
 
 const CarouselCardItem = ({ item, index }: any) => {
-    //const  jj = useNavigation<any>() 
     return (
-        <Center flexGrow={'1'} flexBasis={'150'} py={'2'}>
-            <Pressable onPress={() => console.log(item.uid)}>
-                <Image
-                    source={{ uri: values(item.upload)[0].uri }}
-                    alt="Alternate Text"
-                    size={'300'}
-                    resizeMethod={'resize'}
-                    resizeMode={'cover'}
-                />
-            </Pressable>
-
-        </Center>
-
+        <ViewImage uri={values(item.upload)[0].uri} uid={''} />
     )
 }
 
 
 export const Search = () => {
-    const jj = useNavigation<any>()
+   
     const [inputText, setInputText] = useState<string>('');
 
     const isCarousel = React.useRef(null)
@@ -56,19 +44,19 @@ export const Search = () => {
         { queryKey: 'outing', queryFn: queryOuting }
     ])
 
-    
+
 
     useEffect(() => {
-         
+
         Keyboard.addListener('keyboardDidHide', (event) => {
             setInputText('')
             console.log('Henry Asiedu');
-            
+
         })
         return () => {
             Keyboard.removeAllListeners('keyboardDidHide')
         }
-        
+
     }, [])
 
     if (wedding.isSuccess && outing.isSuccess) {
