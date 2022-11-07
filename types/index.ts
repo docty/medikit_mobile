@@ -36,6 +36,7 @@ export interface ISrc {
     uid: string;
     comments: Record<string, IComments>;
     upload: Record<string, IUpload>;
+    tag: ITag
 }
 
 interface IComments {
@@ -43,7 +44,7 @@ interface IComments {
     username: string;
     message: string
 }
-interface IUpload {
+export interface IUpload {
     uri: string
     uid: string
 }
@@ -60,6 +61,7 @@ export interface IUserData {
     following: Record<string, boolean>
 }
 
+export type ITag  = 'Wedding' | 'Outing';
 
 
 // export type BottomTabNavigationParamList = {

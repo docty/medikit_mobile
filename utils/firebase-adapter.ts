@@ -1,5 +1,6 @@
-import { keys, length, lensPath, over, pick, values, view } from 'ramda';
-import { gallery } from './galleryData'
+import { keys, length, lensPath, over, pick, prop, values, view } from 'ramda';
+import { ITag } from '../types';
+import { gallery, user } from './galleryData'
 
 
 export const getLength = () => {
@@ -45,3 +46,28 @@ export const getSingleData = (id: string) => {
 
     return compute;
 }
+
+export const getIndividualData = (id: string) => {
+    const data = prop(id, gallery);
+    return data;
+}
+
+/**
+ * Fetches a user with a given id
+ * @param id user id
+ * @returns 
+ */
+export const getIndividualUser = (id: string) => {
+    const data = prop(id, user);
+    return data;
+}
+
+export const fetchByTag = (tag: ITag) => {
+    const data = values(gallery)
+
+    const response = data.map(item => {
+        return values(item.src).filter(found => found.tag === tag)
+    })
+
+    return response.flat()
+}    

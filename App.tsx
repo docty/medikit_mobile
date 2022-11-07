@@ -21,9 +21,23 @@ export default function App() {
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
             <Stack.Navigator>
-              <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
-              <Stack.Screen name="User" options={{ headerShadowVisible: false }} component={User} />
-              <Stack.Screen name="Enlarge" options={{ headerShadowVisible: false }} component={Enlarge} />
+              <Stack.Screen
+                name="Home"
+                options={{ headerShown: false }}
+                component={Home}
+              />
+              <Stack.Screen
+                name="User"
+                options={{ headerShadowVisible: false }}
+                component={User}
+              />
+              <Stack.Screen
+                name="Enlarge"
+                options={{
+                  headerShadowVisible: false,
+                }}
+                component={Enlarge}
+              />
             </Stack.Navigator>
           </QueryClientProvider>
         </NavigationContainer>

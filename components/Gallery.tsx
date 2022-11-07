@@ -70,6 +70,7 @@ export const Gallery = () => {
             onEndReached={loadMore}
             onEndReachedThreshold={20}
             keyExtractor={(item, index) => index.toString()}
+            pagingEnabled={true}
             ListFooterComponent={isFetching ? null : <ActivityIndicator />}
 
         />

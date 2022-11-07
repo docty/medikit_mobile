@@ -37,7 +37,8 @@ export const gallery: Record<string, IGalleryCollection> = {
                         uid: 'dsg',
                         uri: 'https://dezangozone.com/wp-content/uploads/2019/04/ankara.jpg'
                     },
-                }
+                },
+                tag: 'Outing'
             },
             'mnmn': {
                 likes: {},
@@ -56,7 +57,8 @@ export const gallery: Record<string, IGalleryCollection> = {
                         uid: 'dsg',
                         uri: 'https://i.pinimg.com/736x/6d/34/9c/6d349c286bfb9fc1dc4863590278545b.jpg',
                     },
-                }
+                },
+                tag: 'Wedding'
             }
         }
     },
@@ -94,7 +96,8 @@ export const gallery: Record<string, IGalleryCollection> = {
                         uid: 'iyut',
                         uri: 'https://i.pinimg.com/736x/33/17/2a/33172a47b1bce15024891a3278c99e26.jpg'
                     },
-                }
+                },
+                tag: 'Wedding'
             }
         }
     }
