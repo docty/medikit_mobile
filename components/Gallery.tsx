@@ -1,4 +1,4 @@
-import React, { } from "react";
+import React from "react";
 import { ActivityIndicator, useWindowDimensions } from 'react-native'
 import { IGalleryCollection, ISrc } from "../types";
 import { QueryFunctionContext, useInfiniteQuery } from "react-query";
@@ -6,6 +6,7 @@ import { getRandomKey, getLength, getSingleData } from "../utils/firebase-adapte
 import { values } from "ramda";
 import Thumbnail from "./Thumbnail";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
+import { Box } from "native-base";
 
 
 
@@ -53,7 +54,7 @@ export const Gallery = () => {
 
 
     return (
-
+       
         <FlashList
             data={data?.pages}
             renderItem={renderItem}

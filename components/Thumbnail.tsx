@@ -6,6 +6,7 @@ import { isEmpty, values } from "ramda";
 import React, { Children, useEffect, useState } from "react";
 import { Pressable, useWindowDimensions } from "react-native";
 import { IGallery, HomeScreenNavigationProp, IUpload } from "../types";
+import { downloadFile } from "../utils/download";
 
  
 const Thumbnail = ({ username, uid, src }: IGallery) => {
@@ -28,7 +29,7 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
     }
 
     const btnDownloadClick = () => {
-        console.log('btnDownloadClick');
+        downloadFile(isEmpty(state) ? images[0].uri : state) 
     }
 
     const btnCommentClick = () => {
