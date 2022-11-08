@@ -2,26 +2,26 @@ import { AntDesign } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { Box, ZStack, Center, HStack, Avatar, Icon, Image, Text } from "native-base";
-import { isEmpty, length } from "ramda";
+import { isEmpty, values } from "ramda";
 import React, { Children, useEffect, useState } from "react";
 import { Pressable, useWindowDimensions } from "react-native";
 import { IGallery, HomeScreenNavigationProp, IUpload } from "../types";
+
  
 const Thumbnail = ({ username, uid, src }: IGallery) => {
 
-
+    const { comments, likes, upload } = src;
+    const images = values(upload);
 
     const { height } = useWindowDimensions();
-    const { comments, likes, upload } = src;
-
-    const up = Object.values(upload);
-
+    const navigation = useNavigation<HomeScreenNavigationProp>();
     const [state, setState] = useState<string>('');
     const [like, setLike] = useState<boolean>(false);
+    const bottomTabBarHeight = useBottomTabBarHeight()
 
-    const navigation = useNavigation<HomeScreenNavigationProp>();
 
-    const currentHeight = height - useBottomTabBarHeight()
+    const currentHeight = height - bottomTabBarHeight;
+
 
     const btnTitleClick = (username: string, uid: string) => {
         navigation.navigate('User', { username, uid })
@@ -29,47 +29,34 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
 
     const btnDownloadClick = () => {
         console.log('btnDownloadClick');
-
     }
 
     const btnCommentClick = () => {
         console.log('btnCommentClick');
-
     }
 
     const btnLikeClick = () => {
         setLike(p => !p);
         console.log('btnLikeClick');
-
     }
 
+
     useEffect(() => {
-        // setState(up[0].uri)
-        
+        setState('')
 
-    }, [state])
+    }, [src])
 
-    // console.log('----', username); 
-  
 
-    // return  <Text fontSize="md" color={'black'} height={height} fontWeight={'bold'}>@{up[length(up)-1].uri}</Text>
     return (
         <Box bg={'darkBlue.900'} height={currentHeight} borderBottomWidth={'1'} borderBottomColor={'gray.800'}>
             <ZStack>
                 <Center height={currentHeight - 80} w={'full'} >
                     <Image
-                        source={{ uri: state }}
+                        source={{ uri: isEmpty(state) ? images[0].uri : state }}
                         alt="Alternate Text"
                         size={'full'}
                         resizeMode={'contain'}
                     />
-                    {/* <Image
-                        source={{ uri: sd }}
-                        alt="Alternate Text"
-                        size={'full'}
-                        resizeMode={'contain'}
-                    /> */}
-
                 </Center>
 
                 <Box px={'4'} width={'full'} display={'flex'} flexDirection="row" justifyContent={'space-between'} alignItems={'center'} p={'2'}>
@@ -98,10 +85,9 @@ const Thumbnail = ({ username, uid, src }: IGallery) => {
                         </Center>
                     </Pressable>
                     <HStack space="1" alignItems="center">
-                        <SubImages data={up} output={function (uri: string) {
-                              
-                            //console.log(uri)
-                           setState(uri);
+                        <SubImages data={images} output={function (uri: string) {
+
+                            setState(uri);
                         }} />
 
                     </HStack>
@@ -125,27 +111,32 @@ interface ISub {
     output: (uri: string) => void
 }
 
+
 const SubImages = (props: ISub) => {
 
-    const [state, setState] = useState<string>(props.data[0].uri);
+    const [state, setState] = useState<number>(0);
+
+    const itemClicked = (index: number, uri: string) => {
+        setState(index);
+        props.output(uri)
+    }
 
     useEffect(() => {
-        //console.log(state);
-        props.output(state)
+        setState(0)
 
-    }, [state])
+    }, [props.data[0]])
 
     return (
         <>
-            {Children.toArray(props.data.map(child => (
-                <Pressable onPress={() => { setState(child.uri) }}  >
+            {Children.toArray(props.data.map(({ uri }, index) => (
+                <Pressable onPress={() => itemClicked(index, uri)}  >
                     <Center
                         borderWidth={'2'}
-                        borderColor={`${state === child.uri ? 'blue.400' : 'white'}`}
+                        borderColor={`${state === index ? 'blue.400' : 'white'}`}
                         size={'16'}
                     >
                         <Image
-                            source={{ uri: child.uri }}
+                            source={{ uri: uri }}
                             alt="Alternate Image"
                             style={{ resizeMode: 'contain' }}
                             size={'full'}

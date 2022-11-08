@@ -1,5 +1,5 @@
-import { keys, length, lensPath, over, pick, prop, values, view } from 'ramda';
-import { ITag } from '../types';
+import { keys, length, lensPath, over, pick, prop, props, values, view } from 'ramda';
+import { IGalleryCollection, ITag } from '../types';
 import { gallery, user } from './galleryData'
 
 
@@ -23,7 +23,7 @@ export const getRandomKey = (count: number) => {
 }
 
 
-export const getSingleData = (id: string) => {
+export const getSingleData = (id: string): IGalleryCollection => {
 
     const path = lensPath([id, 'src']);
 
@@ -44,7 +44,7 @@ export const getSingleData = (id: string) => {
 
     const compute = over(path, predicate, data)
 
-    return compute;
+    return prop(id, compute);
 }
 
 export const getIndividualData = (id: string) => {
