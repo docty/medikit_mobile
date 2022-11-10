@@ -40,7 +40,7 @@ export interface IGalleryCollection {
 }
 
 export interface ISrc {
-    likes: Record<string, boolean>;
+    likes: Record<string, IBoolean>;
     uid: string;
     comments: Record<string, IComments>;
     upload: Record<string, IUpload>;
@@ -51,6 +51,11 @@ interface IComments {
     uid: string;
     username: string;
     message: string
+}
+
+interface IBoolean {
+    uid: string;
+    status: boolean
 }
 export interface IUpload {
     uri: string
@@ -65,8 +70,8 @@ export interface IUserData {
     username: string
     fullName: string;
     displayImage: string
-    followers: Record<string, boolean>
-    following: Record<string, boolean>
+    followers: Record<string, IBoolean>
+    following: Record<string, IBoolean>
 }
 
 export type ITag = 'Wedding' | 'Outing';

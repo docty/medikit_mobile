@@ -8,8 +8,14 @@ export const gallery: Record<string, IGalleryCollection> = {
         src: {
             'MReddg': {
                 likes: {
-                    '450943jklglmkwlerlt5l': true,
-                    '43o0985609wiergportjwpre': true
+                    '450943jklglmkwlerlt5l': {
+                        uid: '450943jklglmkwlerlt5l',
+                        status: true,
+                    },
+                    '43o0985609wiergportjwpre': {
+                        uid: '43o0985609wiergportjwpre',
+                        status: true,
+                    }
                 },
                 uid: 'MReddg',
                 comments: {
@@ -68,7 +74,10 @@ export const gallery: Record<string, IGalleryCollection> = {
         src: {
             'Rewdas': {
                 likes: {
-                    '43o0985609wiergportjwpre': true
+                    '43o0985609wiergportjwpre':  {
+                        uid: '43o0985609wiergportjwpre',
+                        status: true,
+                    }
                 },
                 uid: 'Rewdas',
                 comments: {
@@ -107,9 +116,18 @@ export const gallery: Record<string, IGalleryCollection> = {
         src: {
             'jmgsaa': {
                 likes: {
-                    '450943jklglmkwlerlt5l': true,
-                    '43o0985609wiergportjwpre': true,
-                    '9035j0tjw0emsrjg09wretw3': true
+                    '450943jklglmkwlerlt5l':  {
+                        uid: '450943jklglmkwlerlt5l',
+                        status: true,
+                    },
+                    '43o0985609wiergportjwpre':  {
+                        uid: '43o0985609wiergportjwpre',
+                        status: true,
+                    },
+                    '9035j0tjw0emsrjg09wretw3':  {
+                        uid: '9035j0tjw0emsrjg09wretw3',
+                        status: true,
+                    }
                 },
                 uid: 'jmgsaa',
                 comments: {
@@ -174,10 +192,16 @@ export const user: IUser = {
         username: 'decimalvalues',
         fullName: 'Henry Asiedu',
         followers: {
-            '43o0985609wiergportjwpre': true
+            '43o0985609wiergportjwpre': {
+                uid: '43o0985609wiergportjwpre',
+                status: true
+            }
         },
         following: {
-            '43o0985609wiergportjwpre': true
+            '43o0985609wiergportjwpre':  {
+                uid: '43o0985609wiergportjwpre',
+                status: true
+            }
         }
     },
     '43o0985609wiergportjwpre': {
@@ -187,10 +211,16 @@ export const user: IUser = {
         username: 'person',
         fullName: 'Elsie Aikins',
         followers: {
-            '450943jklglmkwlerlt5l': true
+            '450943jklglmkwlerlt5l':  {
+                uid: '450943jklglmkwlerlt5l',
+                status: true
+            }
         },
         following: {
-            '43o0985609wiergportjwpre': true
+            '43o0985609wiergportjwpre':  {
+                uid: '43o0985609wiergportjwpre',
+                status: true
+            }
         }
     },
     '9035j0tjw0emsrjg09wretw3': {
@@ -200,11 +230,20 @@ export const user: IUser = {
         username: 'adomic',
         fullName: 'Adom Bright',
         followers: {
-            '43o0985609wiergportjwpre': true,
-            '450943jklglmkwlerlt5l': true,
+            '43o0985609wiergportjwpre':  {
+                uid: '43o0985609wiergportjwpre',
+                status: true
+            },
+            '450943jklglmkwlerlt5l':  {
+                uid: '450943jklglmkwlerlt5l',
+                status: true
+            },
         },
         following: {
-            '43o0985609wiergportjwpre': true
+            '43o0985609wiergportjwpre':  {
+                uid: '43o0985609wiergportjwpre',
+                status: true
+            }
         }
     }
 }
