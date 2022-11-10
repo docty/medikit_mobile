@@ -1,14 +1,14 @@
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider, Pressable, Icon, Spacer } from "native-base";
+import { Flex, HStack, Avatar, Text, Button, ScrollView, VStack, Divider, Icon, Spacer } from "native-base";
 import { values } from "ramda";
 import React, { Children } from "react";
 import { ActivityIndicator } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { useQueries } from "react-query";
-import { HomeScreenNavigationProp, IUpload } from "../types";
+import { IUpload } from "../types";
 import { getIndividualData, getIndividualUser } from "../utils/firebase-adapter";
 import { ITEM_WIDTH, SLIDER_WIDTH } from "./Search";
+import { useSession } from "./Session";
 import ViewImage from "./ViewImage";
 
 
@@ -16,15 +16,18 @@ import ViewImage from "./ViewImage";
 
 export const Profile = () => {
 
+    const { session } = useSession();
+
 
     const getProfile = () => {
-        const response = getIndividualData('450943jklglmkwlerlt5l')
+
+        const response = getIndividualData(session)
         return Promise.resolve(response);
     }
 
 
     const getUser = () => {
-        const response = getIndividualUser('450943jklglmkwlerlt5l')
+        const response = getIndividualUser(session)
         return Promise.resolve(response);
     }
 
@@ -35,6 +38,7 @@ export const Profile = () => {
     ])
 
 
+    // TODO: Configure the image upload correctly
     const btnUpload = () => {
         console.log('btnUpload');
     }
@@ -70,6 +74,7 @@ export const Profile = () => {
                 </VStack>
 
                 <ScrollView bg={'white'} px={'3'}>
+
                     {
                         Children.toArray(values(profile.data.src).map(item => (
                             <VStack space="1">

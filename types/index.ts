@@ -30,11 +30,13 @@ export type EnlargeRouterProp = RouteProp<StackParamListBase, 'Enlarge'>
 export interface IGallery {
     username: string;
     uid: string;
+    displayImage: string;
     src: ISrc,
 }
 
 export interface IGalleryCollection {
     username: string;
+    displayImage: string;
     uid: string;
     src: Record<string, ISrc>,
 }
@@ -76,6 +78,13 @@ export interface IUserData {
 
 export type ITag = 'Wedding' | 'Outing';
 
+
+export interface IAccount {
+    fullName: string
+    username: string
+    email: string
+    password: string
+}
 
 
 

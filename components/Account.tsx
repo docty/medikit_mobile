@@ -1,37 +1,26 @@
-import { AntDesign, Entypo, Fontisto } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider, Pressable, Icon, Spacer, Input, IconButton } from "native-base";
-import { values } from "ramda";
+import { AntDesign, Fontisto } from "@expo/vector-icons";
+import { Center, Button, VStack, Icon, Input } from "native-base";
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator } from "react-native";
-import Carousel from "react-native-snap-carousel";
-import { useMutation, useQueries } from "react-query";
-import { BottomScreenNavigationProp, HomeScreenNavigationProp, IUpload } from "../types";
-import { getIndividualData, getIndividualUser } from "../utils/firebase-adapter";
-import { ITEM_WIDTH, SLIDER_WIDTH } from "./Search";
-import ViewImage from "./ViewImage";
+import { useMutation } from "react-query";
+import { IAccount } from "../types";
+import { registerUser } from "../utils/firebase-adapter";
+import { setItemAsync } from 'expo-secure-store'
+import { useSession } from "./Session";
 
 
-interface IAccount {
-    fullName: string
-    username: string
-    email: string
-    password: string
-}
 
 type IActive = 'register' | 'login'
 
 export const Account = () => {
 
-    const navigation = useNavigation<BottomScreenNavigationProp>();
-
     const [active, setActive] = useState<boolean>(false);
     const [section, setSection] = useState<IActive>('register');
     const [user, setUser] = useState<IAccount>({} as IAccount)
+    const { setSession } = useSession();
 
-    const sendData = (response: any) => {
+    const sendData = async (response: any) => {
 
-        return Promise.resolve('hjhj');
+        return await registerUser(response);
 
     }
 
@@ -40,12 +29,16 @@ export const Account = () => {
         mutationFn: sendData
     })
 
+
     useEffect(() => {
         if (isSuccess) {
-            navigation.navigate('Profile')
+            setItemAsync('credentials', data.uid).then(res => {
+                setSession('credentials')
+            })
         }
 
     }, [data]);
+
 
     const onbtnClick = (id: IActive) => {
         setActive(true)
@@ -64,6 +57,7 @@ export const Account = () => {
         register: <Register setUser={(value) => setUser(value)} user={user} />,
         login: <Login setUser={(value) => setUser(value)} user={user} />
     }
+
 
     return (
         <Center height={'full'} bg={'white'} >

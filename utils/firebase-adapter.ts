@@ -1,5 +1,5 @@
 import { keys, length, lensPath, over, pick, prop, props, values, view } from 'ramda';
-import { IGalleryCollection, ITag } from '../types';
+import { IAccount, IGalleryCollection, ITag } from '../types';
 import { gallery, user } from './galleryData'
 
 
@@ -70,4 +70,25 @@ export const fetchByTag = (tag: ITag) => {
     })
 
     return response.flat()
-}    
+}
+
+
+export const registerUser = (data: IAccount) => {
+
+
+    return Promise.resolve({
+        uid: '450943jklglmkwlerlt5l'
+    })
+}
+
+export const setLikeAction = (uid: string) => {
+
+
+    return Promise.resolve(true)
+}  
+
+export const setFollowUser = (uid: string) => {
+
+
+    return Promise.resolve(true)
+}

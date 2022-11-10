@@ -5,7 +5,7 @@ import Carousel from 'react-native-snap-carousel'
 import { ActivityIndicator, Dimensions, Keyboard } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { fetchByTag } from "../utils/firebase-adapter";
-import { useQueries } from "react-query";
+import { useMutation, useQueries } from "react-query";
 import { values } from "ramda";
 import ViewImage from "./ViewImage";
 
@@ -23,7 +23,7 @@ const CarouselCardItem = ({ item, index }: any) => {
 
 
 export const Search = () => {
-   
+
     const [inputText, setInputText] = useState<string>('');
 
     const isCarousel = React.useRef(null)
@@ -38,19 +38,28 @@ export const Search = () => {
         return Promise.resolve(response);
     }
 
+    const searchQuery = (id: string) => {
+
+        console.log(id);
+        return Promise.resolve(5)
+    }
 
     const { "0": wedding, "1": outing } = useQueries([
         { queryKey: 'wedding', queryFn: queryWedding },
         { queryKey: 'outing', queryFn: queryOuting }
     ])
 
-
+    const { mutate, data } = useMutation({
+        mutationKey: ['search'],
+        mutationFn: searchQuery
+    })
 
     useEffect(() => {
-
+        // TODO: Configure the search box correctly to its corresponding queries
         Keyboard.addListener('keyboardDidHide', (event) => {
             setInputText('')
-            console.log('Henry Asiedu');
+            mutate(inputText)
+
 
         })
         return () => {
@@ -78,7 +87,7 @@ export const Search = () => {
 
 
 
-                    <Text px={'3'} fontSize="lg" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Wedding Event</Text>
+                    <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Wedding Event</Text>
 
                     <Carousel
                         layout="default"
@@ -95,7 +104,7 @@ export const Search = () => {
 
                     />
 
-                    <Text px={'3'} fontSize="lg" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Special Outing</Text>
+                    <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Special Outing</Text>
 
                     <Carousel
                         layout="default"

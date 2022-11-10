@@ -4,6 +4,7 @@ export const gallery: Record<string, IGalleryCollection> = {
 
     '450943jklglmkwlerlt5l': {
         username: 'decimalvalues',
+        displayImage: 'https://netstorage-tuko.akamaized.net/images/a91eb71fd624f490.jpg',
         uid: '450943jklglmkwlerlt5l',
         src: {
             'MReddg': {
@@ -70,6 +71,7 @@ export const gallery: Record<string, IGalleryCollection> = {
     },
     '43o0985609wiergportjwpre': {
         username: 'person',
+        displayImage: 'https://stylerave.com/wp-content/uploads/2020/07/C8413117-646A-4FAF-8B91-59C55DA10EE4.jpeg',
         uid: '43o0985609wiergportjwpre',
         src: {
             'Rewdas': {
@@ -112,6 +114,7 @@ export const gallery: Record<string, IGalleryCollection> = {
     },
     '9035j0tjw0emsrjg09wretw3': {
         username: 'adomic',
+        displayImage: 'https://dezangozone.com/wp-content/uploads/2018/09/aso2Bebi2Bmaboplus.jpg',
         uid: '9035j0tjw0emsrjg09wretw3',
         src: {
             'jmgsaa': {

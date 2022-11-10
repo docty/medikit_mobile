@@ -31,19 +31,19 @@ export const Gallery = () => {
 
     const renderItem = ({ item }: ListRenderItemInfo<IGalleryCollection>) => {
 
-        const { username, uid, src } = item
+        const { username, uid, src, displayImage } = item
 
         const srcData = values(src)[0] as ISrc;
 
         if (isSuccess) {
             return (
-                <Thumbnail username={username} uid={uid} src={srcData} />
+                <Thumbnail username={username} uid={uid} src={srcData} displayImage={displayImage} />
 
             )
         } else return null
     }
 
-     
+
 
     const loadMore = () => {
         const length = getLength();
@@ -54,7 +54,7 @@ export const Gallery = () => {
 
 
     return (
-       
+
         <FlashList
             data={data?.pages}
             renderItem={renderItem}
