@@ -48,11 +48,12 @@ const User = () => {
     }
 
     const btnFollow = () => {
-        console.log('btnFollow');
-
+        
         if (type(session) === 'Null') {
             return toast.show('Login to like a design', 300)
         }
+        
+        console.log('btnFollow');
 
         mutate(session)
     }

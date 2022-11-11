@@ -1,8 +1,8 @@
-import { getItemAsync } from "expo-secure-store";
+import { deleteItemAsync, getItemAsync } from "expo-secure-store";
 import { useState, createContext, useContext, Dispatch, useEffect } from "react";
 
 
-const SessionContext = createContext<any>(null);
+const SessionContext = createContext<ISessionContext>({} as ISessionContext);
 
 export const SessionProvider = ({ children }: IContext) => {
 
@@ -10,7 +10,7 @@ export const SessionProvider = ({ children }: IContext) => {
     const [session, setSession] = useState<string>('')
 
     useEffect(() => {
-
+            
         getItemAsync('credentials').then(res => {
             setSession(res!);
         }).catch(e => {
