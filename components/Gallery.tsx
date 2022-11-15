@@ -2,7 +2,7 @@ import React from "react";
 import { ActivityIndicator, useWindowDimensions } from 'react-native'
 import { IGalleryCollection, ISrc } from "../types";
 import { QueryFunctionContext, useInfiniteQuery } from "react-query";
-import { getRandomKey, getLength, getSingleData } from "../utils/firebase-adapter";
+import { getRandomKey, getLength, getSingleData, getFetch } from "../utils/firebase-adapter";
 import { values } from "ramda";
 import Thumbnail from "./Thumbnail";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
@@ -16,6 +16,7 @@ export const Gallery = () => {
 
 
     const queryMyDatabase = ({ pageParam = getRandomKey(getLength()) }: QueryFunctionContext) => {
+        getFetch(pageParam)
         const response = getSingleData(pageParam)
         return Promise.resolve(response)
     }

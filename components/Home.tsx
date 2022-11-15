@@ -15,6 +15,7 @@ const Home = () => {
 
     return (
         <SessionProvider>
+            <StatusBar  />
             <Tab.Navigator initialRouteName="Gallery" >
                 <Tab.Screen
                     name={'Search'}

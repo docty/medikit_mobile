@@ -25,6 +25,8 @@ export const getRandomKey = (count: number) => {
 
 export const getSingleData = (id: string): IGalleryCollection => {
 
+
+
     const path = lensPath([id, 'src']);
 
     const data = pick([id], gallery);
@@ -73,6 +75,42 @@ export const fetchByTag = (tag: ITag) => {
 }
 
 
+
+export const getFetch =  (id: string) => {
+
+    // const response = await fetch('http://192.168.174.253:19000/assets/faker/gallery.json')
+
+    // const gallery = await response.json()
+
+    // const path = lensPath([id, 'src']);
+   
+    
+    // const data = pick([id], gallery);
+
+    // console.log(typeof gallery);
+    
+    // const predicate = (res: any) => {
+    //     const getKeys = keys(res);
+
+    //     const randomNumber = getRandomNumber(length(getKeys))
+
+    //     const getKey = getKeys[randomNumber];
+
+    //     const newData = pick([getKey], res);
+
+    //     return newData
+
+    // }
+
+    // const compute = over(path, predicate, data)
+
+    // const result =  prop(id, compute);
+
+
+    // console.log(result); 
+    
+}
+
 export const registerUser = (data: IAccount) => {
 
 
@@ -85,7 +123,7 @@ export const setLikeAction = (uid: string) => {
 
 
     return Promise.resolve(true)
-}  
+}
 
 export const setFollowUser = (uid: string) => {
 

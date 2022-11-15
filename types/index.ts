@@ -76,7 +76,7 @@ export interface IUserData {
     following: Record<string, IBoolean>
 }
 
-export type ITag = 'Wedding' | 'Outing';
+export type ITag = 'Wedding' | 'Outing' | 'Graduation';
 
 
 export interface IAccount {

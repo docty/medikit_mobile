@@ -7,8 +7,7 @@ import User from "./components/User";
 import Enlarge from "./components/Enlarge";
 import { StackParamListBase } from "./types";
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { StatusBar } from "expo-status-bar";
-import { Tester } from "./components/Tester";
+import { StatusBar } from "expo-status-bar"; 
 
 const Stack = createNativeStackNavigator<StackParamListBase>();
 const queryClient = new QueryClient();
