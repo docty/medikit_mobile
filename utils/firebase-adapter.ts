@@ -1,60 +1,37 @@
-import { keys, length, lensPath, over, pick, prop, props, values, view } from 'ramda';
+import { keys, length, lensPath, omit, over, pick, prop, props, reject, values, view } from 'ramda';
 import { IAccount, IGalleryCollection, ITag, IUser, IUserData } from '../types';
-import { get } from '@decimalvalues/faker'
+import { get, getId, set } from '@decimalvalues/faker'
 
 export const getLength = async () => {
-
-    const response = await get('http://192.168.174.253:19000/assets/faker/gallery.json');
+    const host = 'http://192.168.174.253:3000/faker/gallery.json/';
+    const response = await get(host);
 
     return length(keys(response));
 }
 
 export const getRandomNumber = (count: number) => {
 
-
     return Math.floor(Math.random() * count);
 }
 
 
 export const getRandomKey = async (count: number) => {
+    const host = 'http://192.168.174.253:3000/faker/gallery.json/';
 
     const position = Math.floor(Math.random() * count);
-    const response = await get('http://192.168.174.253:19000/assets/faker/gallery.json');
+
+    const response = await get(host);
 
     return keys(response)[position]
 }
 
 
-// export const getSingleData = (id: string): IGalleryCollection => {
-
-
-
-//     const path = lensPath([id, 'src']);
-
-//     const data = pick([id], gallery);
-
-//     const predicate = (res: any) => {
-//         const getKeys = keys(res);
-
-//         const randomNumber = getRandomNumber(length(getKeys))
-
-//         const getKey = getKeys[randomNumber];
-
-//         const newData = pick([getKey], res);
-
-//         return newData
-
-//     }
-
-//     const compute = over(path, predicate, data)
-
-//     return prop(id, compute);
-// }
 
 export const getIndividualData = async (id: string) => {
-    const response = await get<IGalleryCollection>('http://192.168.174.253:19000/assets/faker/gallery.json/' + id);
-
-    return response;
+    const host = 'http://192.168.174.253:3000/faker/gallery.json/';
+    const response = await get<IGalleryCollection>(`${host}${id}`);
+    const newSet = prop(id, response) as unknown
+    return newSet as IGalleryCollection;
 }
 
 /**
@@ -63,58 +40,61 @@ export const getIndividualData = async (id: string) => {
  * @returns 
  */
 export const getIndividualUser = async (id: string) => {
-    const response = await get<IUserData>('http://192.168.174.253:19000/assets/faker/user.json/' + id);
-      
-    return response;
-}
-
-export const fetchByTag = (tag: ITag) => {
-    // const data = values(gallery)
-
-    // const response = data.map(item => {
-    //     return values(item.src).filter(found => found.tag === tag)
-    // })
-
-    // return response.flat()
+    const host = 'http://192.168.174.253:3000/faker/user.json/';
+    const response = await get<IUserData>(`${host}${id}`);
+    const newSet = prop(id, response) as unknown
+    return newSet as IUserData;
 }
 
 
+export const registerUser = async (data: IAccount) => {
+    const host = 'http://192.168.174.253:3000/faker/user.json/';
 
-export const registerUser = (data: IAccount) => {
+    const uid = getId();
 
+    const newData = {
+        ...omit(['password'], data),
+        uid,
+        displayImage: "https://outfittrends.b-cdn.net/wp-content/uploads/2021/03/D5_PADGWAAAdSmO-400x500.jpeg",
+        followers: {},
+        following: {}
+    }
 
-    return Promise.resolve({
-        uid: '450943jklglmkwlerlt5l'
-    })
+    try {
+        await set(`${host}${uid}`, newData)
+        return Promise.resolve({ uid })
+    } catch {
+        return Promise.reject({ message: 'Error occurred' })
+    }
+
 }
 
 export const setLikeAction = (uid: string) => {
-
-
     return Promise.resolve(true)
 }
 
 export const setFollowUser = (uid: string) => {
 
-
     return Promise.resolve(true)
 }
 
+ 
+export const fetchByTag = (tag: string) => {
+
+    return ['https://outfittrends.b-cdn.net/wp-content/uploads/2021/03/D5_PADGWAAAdSmO-400x500.jpeg'];
+}
 
 
 export const getFetch = async (id: string) => {
 
+    const path = lensPath([id, 'src']);
 
-    const path = lensPath(['src']);
+    const host = 'http://192.168.174.253:3000/faker/gallery.json/';
 
-
-    const response = await get<IGalleryCollection>('http://192.168.174.253:19000/assets/faker/gallery.json/' + id)
-
-
+    const response = await get<IGalleryCollection>(`${host}${id}`)
 
     const predicate = (res: any) => {
         const getKeys = keys(res);
-
 
         const randomNumber = getRandomNumber(length(getKeys))
 
@@ -126,8 +106,10 @@ export const getFetch = async (id: string) => {
 
     }
 
-    const compute = over(path, predicate, response) 
-    
-    return compute
+    const compute = over(path, predicate, response)
+
+    const newSet = prop(id, compute)
+
+    return newSet
 
 }

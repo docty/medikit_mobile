@@ -2,7 +2,7 @@ const { faker, getUsername, repeat, getId, getImage, getEmail, getFromList, getT
 
 /** @type {import('@decimalvalues/faker').FakerConfig} */
 const gallery = {
-    outDir: '/assets/faker',
+    output: '/assets/faker',
     filename: 'gallery.json',
     structure: faker(repeat({
         username: getUsername,
@@ -31,7 +31,7 @@ const gallery = {
 
 
 const user = {
-    outDir: '/assets/faker',
+    output: '/assets/faker',
     filename: 'user.json',
     structure: faker(repeat({
         uid: getId,

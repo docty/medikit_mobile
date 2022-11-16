@@ -24,6 +24,7 @@ const User = () => {
 
     const getUser = async () => {
         const response = await getIndividualUser(params?.uid)
+        
         return Promise.resolve(response);
     }
 
@@ -59,7 +60,7 @@ const User = () => {
     }
 
     useEffect(() => {
-        console.log(user.data);
+        
 
     }, [profile])
 
@@ -71,10 +72,10 @@ const User = () => {
 
                 <VStack bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'4'}>
                     <Avatar
-                        source={{ uri: user.data.displayImage }}
+                        source={{ uri:  user.data.displayImage }}
                         size={'2xl'}
                     />
-                     <Text fontSize="sm" fontWeight={'medium'}>@{user.data.username}</Text>
+                     <Text fontSize="sm" fontWeight={'medium'}>@{user.data!.username}</Text>
                     <HStack space="4"  >
                         <Text fontSize="sm" color={'blueGray.700'}>{values(user.data.followers).length} followers</Text>
                         <Divider orientation="vertical" />

@@ -6,7 +6,7 @@ import { Main } from "./Main"
 import { Profile } from "./Profile"
 import { Search } from "./Search"
 import { QueryFunctionContext, useInfiniteQuery, useQuery } from 'react-query';
-import { getLength, getRandomKey, getRandomNumber, getSingleData } from "../utils/firebase-adapter"
+import { getLength, getRandomKey, getRandomNumber } from "../utils/firebase-adapter"
 import { isEmpty, keys } from "ramda"
 import { HomeScreenNavigationProp, IGallery, ISrc } from "../types"
 import { useNavigation } from "@react-navigation/native"

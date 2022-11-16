@@ -15,7 +15,12 @@ export const Account = () => {
 
     const [active, setActive] = useState<boolean>(false);
     const [section, setSection] = useState<IActive>('register');
-    const [user, setUser] = useState<IAccount>({} as IAccount)
+    const [user, setUser] = useState<IAccount>({
+        email: 'developer@afrik.com',
+        fullName: 'Afrik Team',
+        username: 'deveoper',
+        password: '123456789'
+    } as IAccount)
     const { setSession } = useSession();
 
     const sendData = async (response: any) => {
@@ -45,7 +50,7 @@ export const Account = () => {
         setSection(id)
 
         if (active) {
-            setUser({} as IAccount)
+            // setUser({} as IAccount)
             mutate(user)
         }
 

@@ -6,7 +6,7 @@ import { getRandomKey, getLength, getFetch } from "../utils/firebase-adapter";
 import { values } from "ramda";
 import Thumbnail from "./Thumbnail";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
-
+ 
 
 export const Gallery = () => {
     const { height } = useWindowDimensions();
@@ -15,10 +15,10 @@ export const Gallery = () => {
     const queryMyDatabase = async ({ pageParam = 1 }: QueryFunctionContext) => {
 
         const length = await getLength();
+
         const pageParams = await getRandomKey(length)
 
         const response = await getFetch(pageParams)
-
 
         return Promise.resolve(response)
     }
@@ -54,24 +54,29 @@ export const Gallery = () => {
     }
 
 
-
-    return (
-
-        <FlashList
-            data={data?.pages}
-            renderItem={renderItem}
-            estimatedItemSize={height}
-            // onEndReached={loadMore}
-            onEndReachedThreshold={0.5}
-            keyExtractor={(item, index) => index.toString()}
-            pagingEnabled={true}
-            refreshing={false}
-            onRefresh={loadMore}
-            ListFooterComponent={isFetching ? null : <ActivityIndicator />}
-        />
+    if (isSuccess) {
 
 
-    )
+        return (
+
+            <FlashList
+                data={data?.pages}
+                renderItem={renderItem}
+                estimatedItemSize={height}
+                // onEndReached={loadMore}
+                onEndReachedThreshold={0.5}
+                keyExtractor={(item, index) => index.toString()}
+                pagingEnabled={true}
+                refreshing={false}
+                onRefresh={loadMore}
+                ListFooterComponent={isFetching ? null : <ActivityIndicator />}
+            />
+
+
+        )
+    }
+
+    return <ActivityIndicator size={'large'} />
 }
 
 
