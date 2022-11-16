@@ -1,11 +1,12 @@
 import { keys, length, lensPath, over, pick, prop, props, values, view } from 'ramda';
-import { IAccount, IGalleryCollection, ITag } from '../types';
-import { gallery, user } from './galleryData'
+import { IAccount, IGalleryCollection, ITag, IUser, IUserData } from '../types';
+import { get } from '@decimalvalues/faker'
 
+export const getLength = async () => {
 
-export const getLength = () => {
+    const response = await get('http://192.168.174.253:19000/assets/faker/gallery.json');
 
-    return length(keys(gallery))
+    return length(keys(response));
 }
 
 export const getRandomNumber = (count: number) => {
@@ -15,43 +16,45 @@ export const getRandomNumber = (count: number) => {
 }
 
 
-export const getRandomKey = (count: number) => {
+export const getRandomKey = async (count: number) => {
 
     const position = Math.floor(Math.random() * count);
+    const response = await get('http://192.168.174.253:19000/assets/faker/gallery.json');
 
-    return keys(gallery)[position]
+    return keys(response)[position]
 }
 
 
-export const getSingleData = (id: string): IGalleryCollection => {
+// export const getSingleData = (id: string): IGalleryCollection => {
 
 
 
-    const path = lensPath([id, 'src']);
+//     const path = lensPath([id, 'src']);
 
-    const data = pick([id], gallery);
+//     const data = pick([id], gallery);
 
-    const predicate = (res: any) => {
-        const getKeys = keys(res);
+//     const predicate = (res: any) => {
+//         const getKeys = keys(res);
 
-        const randomNumber = getRandomNumber(length(getKeys))
+//         const randomNumber = getRandomNumber(length(getKeys))
 
-        const getKey = getKeys[randomNumber];
+//         const getKey = getKeys[randomNumber];
 
-        const newData = pick([getKey], res);
+//         const newData = pick([getKey], res);
 
-        return newData
+//         return newData
 
-    }
+//     }
 
-    const compute = over(path, predicate, data)
+//     const compute = over(path, predicate, data)
 
-    return prop(id, compute);
-}
+//     return prop(id, compute);
+// }
 
-export const getIndividualData = (id: string) => {
-    const data = prop(id, gallery);
-    return data;
+export const getIndividualData = async (id: string) => {
+    const response = await get<IGalleryCollection>('http://192.168.174.253:19000/assets/faker/gallery.json/' + id);
+
+    return response;
 }
 
 /**
@@ -59,57 +62,23 @@ export const getIndividualData = (id: string) => {
  * @param id user id
  * @returns 
  */
-export const getIndividualUser = (id: string) => {
-    const data = prop(id, user);
-    return data;
+export const getIndividualUser = async (id: string) => {
+    const response = await get<IUserData>('http://192.168.174.253:19000/assets/faker/user.json/' + id);
+      
+    return response;
 }
 
 export const fetchByTag = (tag: ITag) => {
-    const data = values(gallery)
+    // const data = values(gallery)
 
-    const response = data.map(item => {
-        return values(item.src).filter(found => found.tag === tag)
-    })
+    // const response = data.map(item => {
+    //     return values(item.src).filter(found => found.tag === tag)
+    // })
 
-    return response.flat()
+    // return response.flat()
 }
 
 
-
-export const getFetch =  (id: string) => {
-
-    // const response = await fetch('http://192.168.174.253:19000/assets/faker/gallery.json')
-
-    // const gallery = await response.json()
-
-    // const path = lensPath([id, 'src']);
-   
-    
-    // const data = pick([id], gallery);
-
-    // console.log(typeof gallery);
-    
-    // const predicate = (res: any) => {
-    //     const getKeys = keys(res);
-
-    //     const randomNumber = getRandomNumber(length(getKeys))
-
-    //     const getKey = getKeys[randomNumber];
-
-    //     const newData = pick([getKey], res);
-
-    //     return newData
-
-    // }
-
-    // const compute = over(path, predicate, data)
-
-    // const result =  prop(id, compute);
-
-
-    // console.log(result); 
-    
-}
 
 export const registerUser = (data: IAccount) => {
 
@@ -129,4 +98,36 @@ export const setFollowUser = (uid: string) => {
 
 
     return Promise.resolve(true)
+}
+
+
+
+export const getFetch = async (id: string) => {
+
+
+    const path = lensPath(['src']);
+
+
+    const response = await get<IGalleryCollection>('http://192.168.174.253:19000/assets/faker/gallery.json/' + id)
+
+
+
+    const predicate = (res: any) => {
+        const getKeys = keys(res);
+
+
+        const randomNumber = getRandomNumber(length(getKeys))
+
+        const getKey = getKeys[randomNumber];
+
+        const newData = pick([getKey], res);
+
+        return newData
+
+    }
+
+    const compute = over(path, predicate, response) 
+    
+    return compute
+
 }

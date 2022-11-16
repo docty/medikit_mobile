@@ -14,18 +14,18 @@ const gallery = {
             likes: repeat({
                 uid: getId,
                 status: true
-            }, { count: 1, key: 'uid' }),
+            }, { count: 2, key: 'uid' }),
             comments: repeat({
                 uid: getId,
                 username: getUsername,
                 message: getText
-            }, { count: 1, key: 'uid' }),
+            }, { count: 2, key: 'uid' }),
             upload: repeat({
                 uid: getId,
                 uri: getImage
             }, { count: 3, key: 'uid' })
         }, { count: 2, key: 'uid' }, { tag: ['Outing', 'Wedding', 'Graduation'] })
-    }, { count: 2, key: 'uid' }))
+    }, { count: 3, key: 'uid' }))
 }
 
 
@@ -42,12 +42,12 @@ const user = {
         followers: repeat({
             uid: getId,
             status: true,
-        }, { count: 1, key: 'uid' }),
+        }, { count: 3, key: 'uid' }),
         following: repeat({
             uid: getId,
             status: true,
-        }, { count: 1, key: 'uid' }),
-    }, { count: 1, key: 'uid' }))
+        }, { count: 2, key: 'uid' }),
+    }, { count: 3, key: 'uid' }))
 }
 
 

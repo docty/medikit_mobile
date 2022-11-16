@@ -2,22 +2,24 @@ import React from "react";
 import { ActivityIndicator, useWindowDimensions } from 'react-native'
 import { IGalleryCollection, ISrc } from "../types";
 import { QueryFunctionContext, useInfiniteQuery } from "react-query";
-import { getRandomKey, getLength, getSingleData, getFetch } from "../utils/firebase-adapter";
+import { getRandomKey, getLength, getFetch } from "../utils/firebase-adapter";
 import { values } from "ramda";
 import Thumbnail from "./Thumbnail";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
-import { Box } from "native-base";
-
-
 
 
 export const Gallery = () => {
     const { height } = useWindowDimensions();
 
 
-    const queryMyDatabase = ({ pageParam = getRandomKey(getLength()) }: QueryFunctionContext) => {
-        getFetch(pageParam)
-        const response = getSingleData(pageParam)
+    const queryMyDatabase = async ({ pageParam = 1 }: QueryFunctionContext) => {
+
+        const length = await getLength();
+        const pageParams = await getRandomKey(length)
+
+        const response = await getFetch(pageParams)
+
+
         return Promise.resolve(response)
     }
 
@@ -46,10 +48,9 @@ export const Gallery = () => {
 
 
 
-    const loadMore = () => {
-        const length = getLength();
-        const pageParam = getRandomKey(length)
-        fetchNextPage({ pageParam });
+    const loadMore = async () => {
+
+        fetchNextPage({ pageParam: 1 });
     }
 
 
@@ -60,7 +61,7 @@ export const Gallery = () => {
             data={data?.pages}
             renderItem={renderItem}
             estimatedItemSize={height}
-            onEndReached={loadMore}
+            // onEndReached={loadMore}
             onEndReachedThreshold={0.5}
             keyExtractor={(item, index) => index.toString()}
             pagingEnabled={true}

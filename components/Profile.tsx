@@ -19,15 +19,16 @@ export const Profile = () => {
     const { session } = useSession();
 
 
-    const getProfile = () => {
-
-        const response = getIndividualData(session)
+    const getProfile = async () => {
+        console.log(session);
+        
+        const response = await getIndividualData(session)
         return Promise.resolve(response);
     }
 
 
-    const getUser = () => {
-        const response = getIndividualUser(session)
+    const getUser = async () => {
+        const response = await getIndividualUser(session)
         return Promise.resolve(response);
     }
 
@@ -49,7 +50,7 @@ export const Profile = () => {
         return (
             <>
                 <VStack bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'4'}>
-                    <Avatar
+                    {/* <Avatar
                         source={{ uri: user.data?.displayImage }}
                         size={'2xl'}
                     />
@@ -67,13 +68,13 @@ export const Profile = () => {
                         >
                             Upload
                         </Button>
-                    </VStack>
+                    </VStack> */}
 
 
 
                 </VStack>
 
-                <ScrollView bg={'white'} px={'3'}>
+                {/* <ScrollView bg={'white'} px={'3'}>
 
                     {
                         Children.toArray(values(profile.data.src).map(item => (
@@ -111,7 +112,7 @@ export const Profile = () => {
                         )))
                     }
 
-                </ScrollView>
+                </ScrollView> */}
 
             </>
         )

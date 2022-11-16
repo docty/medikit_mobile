@@ -1,7 +1,7 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider, Box, Pressable } from "native-base";
 import { type, values } from "ramda";
-import React, { Children } from "react";
+import React, { Children, useEffect } from "react";
 import { ActivityIndicator, ToastAndroid } from "react-native";
 import { useMutation, useQueries } from "react-query";
 import { HomeScreenNavigationProp, IGallery, ISrc, IUser, IUserData, UserRouterProp } from "../types";
@@ -16,14 +16,14 @@ const User = () => {
     const { params } = useRoute<UserRouterProp>();
     const { session } = useSession()
 
-    const getProfile = () => {
-        const response = getIndividualData(params?.uid)
+    const getProfile = async () => {
+        const response = await getIndividualData(params?.uid)
         return Promise.resolve(response);
     }
 
 
-    const getUser = () => {
-        const response = getIndividualUser(params?.uid)
+    const getUser = async () => {
+        const response = await getIndividualUser(params?.uid)
         return Promise.resolve(response);
     }
 
@@ -48,21 +48,25 @@ const User = () => {
     }
 
     const btnFollow = () => {
-        
+
         if (type(session) === 'Null') {
             return toast.show('Login to like a design', 300)
         }
-        
+
         console.log('btnFollow');
 
         mutate(session)
     }
 
+    useEffect(() => {
+        console.log(user.data);
 
+    }, [profile])
 
     if (profile.isSuccess && user.isSuccess) {
         return (
             <>
+
 
 
                 <VStack bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'4'}>
@@ -70,13 +74,13 @@ const User = () => {
                         source={{ uri: user.data.displayImage }}
                         size={'2xl'}
                     />
-                    <Text fontSize="sm" fontWeight={'medium'}>@{user.data.username}</Text>
+                     <Text fontSize="sm" fontWeight={'medium'}>@{user.data.username}</Text>
                     <HStack space="4"  >
                         <Text fontSize="sm" color={'blueGray.700'}>{values(user.data.followers).length} followers</Text>
                         <Divider orientation="vertical" />
-                        <Text fontSize="sm">{values(user.data.following).length} following</Text>
-                        {/* TODO: Displayed the number of likes for the user */}
-                    </HStack>
+                        <Text fontSize="sm">{values(user.data.following).length} following</Text> 
+                    {/* TODO: Displayed the number of likes for the user  */}
+                     </HStack>
                     <VStack pb={'3'}>
                         <Button
                             colorScheme="primary"
@@ -91,7 +95,7 @@ const User = () => {
 
 
                 </VStack>
-
+                
 
                 <ScrollView bg={'white'}>
 
