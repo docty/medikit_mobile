@@ -1,6 +1,6 @@
-import { AntDesign } from "@expo/vector-icons";
-import { Flex, HStack, Avatar, Text, Button, ScrollView, VStack, Divider, Icon, Spacer } from "native-base";
-import { values } from "ramda";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { Flex, HStack, Avatar, Text, Button, ScrollView, VStack, Divider, Icon, Spacer, Center } from "native-base";
+import { not, values } from "ramda";
 import React, { Children } from "react";
 import { ActivityIndicator } from "react-native";
 import Carousel from "react-native-snap-carousel";
@@ -20,16 +20,23 @@ export const Profile = () => {
 
 
     const getProfile = async () => {
-        console.log(session);
 
-        const response = await getIndividualData(session)
-        return Promise.resolve(response);
+        try {
+            const response = await getIndividualData(session)
+            return Promise.resolve(response);
+        } catch {
+            return Promise.reject('Network Failed')
+        }
     }
 
 
     const getUser = async () => {
-        const response = await getIndividualUser(session)
-        return Promise.resolve(response);
+        try {
+            const response = await getIndividualUser(session)
+            return Promise.resolve(response);
+        } catch {
+            return Promise.reject('Network Failed')
+        }
     }
 
 
@@ -39,6 +46,7 @@ export const Profile = () => {
     ])
 
 
+
     // TODO: Configure the image upload correctly
     const btnUpload = () => {
         console.log('btnUpload');
@@ -46,10 +54,34 @@ export const Profile = () => {
 
     const isCarousel = React.useRef(null)
 
-    if (profile.isSuccess && user.isSuccess) {
+    if (user.status === 'loading' || profile.status === 'loading') {
+        return (
+            <Center flex={'1'}>
+                <ActivityIndicator size={'large'} />
+            </Center>
+        )
+    } else if (user.status === 'error' || profile.status === 'error') {
+
+        return (
+            <Center p="20" flex={'1'} >
+                <Icon as={MaterialIcons} name="error-outline" size={'4xl'} />
+
+                <Text fontSize="md" my={'4'}>{user.error as string}</Text>
+                <Button
+                    colorScheme="warning"
+                    onPress={getProfile}
+                >
+                    Click Here to try again
+                </Button>
+
+            </Center>
+        )
+
+    } else if (profile.status === 'success' && user.status === 'success') {
+
         return (
             <>
-                <VStack bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'4'}>
+                <VStack safeAreaTop bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'4'}>
                     <Avatar
                         source={{ uri: user.data?.displayImage }}
                         size={'2xl'}
@@ -71,46 +103,49 @@ export const Profile = () => {
                     </VStack>
 
                 </VStack>
+                {
+                    not(profile.data) ? (
+                        <Center bg="white" borderTopWidth={'1'} borderTopColor={'gray.100'} flex={'1'}>
+                            <Text fontSize="md" color={'gray.700'}>Your gallery is empty</Text>
 
-                {/* <ScrollView bg={'white'} px={'3'}>
-                    {
-                        Children.toArray(values(profile.data.src).map(item => (
-                            <VStack space="1">
-                                <Carousel
-                                    layout="default"
-                                    activeSlideAlignment={'start'}
-                                    ref={isCarousel}
-                                    data={values(item.upload)}
-                                    renderItem={CarouselCardItem}
-                                    sliderWidth={SLIDER_WIDTH}
-                                    itemWidth={ITEM_WIDTH}
-                                    inactiveSlideShift={0}
-                                    useScrollView={true}
-                                    vertical={false}
-                                    keyExtractor={(item) => item.uid}
+                        </Center>) :
+                        <ScrollView bg={'white'} px={'3'}>
+                            {
+                                Children.toArray(values(profile.data.src).map(item => (
+                                    <VStack space="1">
+                                        <Carousel
+                                            layout="default"
+                                            activeSlideAlignment={'start'}
+                                            ref={isCarousel}
+                                            data={values(item.upload)}
+                                            renderItem={CarouselCardItem}
+                                            sliderWidth={SLIDER_WIDTH}
+                                            itemWidth={ITEM_WIDTH}
+                                            inactiveSlideShift={0}
+                                            useScrollView={true}
+                                            vertical={false}
+                                            keyExtractor={(item) => item.uid}
+                                        />
 
-                                />
-
-                                <Flex flexDirection={'row'} justifyContent={'space-between'}>
-                                    <HStack space="2" alignItems="center">
-                                        <Icon as={AntDesign} name="heart" />
-                                        <Text fontSize="sm">{values(item.likes).length} likes</Text>
-                                    </HStack>
-                                    <HStack space="2" alignItems="center">
-                                        <Icon as={AntDesign} name="like1" />
-                                        <Text fontSize="sm">{values(item.comments).length} comments</Text>
-                                    </HStack>
-                                </Flex>
-                                <Spacer my={'3'} />
-                            </VStack>
+                                        <Flex flexDirection={'row'} justifyContent={'space-between'}>
+                                            <HStack space="2" alignItems="center">
+                                                <Icon as={AntDesign} name="heart" />
+                                                <Text fontSize="sm">{values(item.likes).length} likes</Text>
+                                            </HStack>
+                                            <HStack space="2" alignItems="center">
+                                                <Icon as={AntDesign} name="like1" />
+                                                <Text fontSize="sm">{values(item.comments).length} comments</Text>
+                                            </HStack>
+                                        </Flex>
+                                        <Spacer my={'3'} />
+                                    </VStack>
 
 
 
-                        )))
-                    }
-
-                </ScrollView> */}
-
+                                )))
+                            }
+                        </ScrollView>
+                }
             </>
         )
     }

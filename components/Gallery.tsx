@@ -2,11 +2,13 @@ import React from "react";
 import { ActivityIndicator, useWindowDimensions } from 'react-native'
 import { IGalleryCollection, ISrc } from "../types";
 import { QueryFunctionContext, useInfiniteQuery } from "react-query";
-import { getRandomKey, getLength, getFetch } from "../utils/firebase-adapter";
+import { getFetch, getAnyKey } from "../utils/firebase-adapter";
 import { values } from "ramda";
 import Thumbnail from "./Thumbnail";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
- 
+import { Button, Center, Icon, Text } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
+
 
 export const Gallery = () => {
     const { height } = useWindowDimensions();
@@ -14,18 +16,22 @@ export const Gallery = () => {
 
     const queryMyDatabase = async ({ pageParam = 1 }: QueryFunctionContext) => {
 
-        const length = await getLength();
 
-        const pageParams = await getRandomKey(length)
+        try {
 
-        const response = await getFetch(pageParams)
+            const pageParams = await getAnyKey()
 
-        return Promise.resolve(response)
+            const response = await getFetch(pageParams)
+
+            return Promise.resolve(response)
+        } catch {
+            return Promise.reject('Network Failed')
+        }
     }
 
 
 
-    const { data, fetchNextPage, isFetching, isSuccess } = useInfiniteQuery({
+    const { data, fetchNextPage, isFetching, status, error } = useInfiniteQuery({
         queryKey: ['gallery'],
         queryFn: queryMyDatabase
     })
@@ -38,12 +44,11 @@ export const Gallery = () => {
 
         const srcData = values(src)[0] as ISrc;
 
-        if (isSuccess) {
-            return (
-                <Thumbnail username={username} uid={uid} src={srcData} displayImage={displayImage} />
+        return (
+            <Thumbnail username={username} uid={uid} src={srcData} displayImage={displayImage} />
 
-            )
-        } else return null
+        )
+
     }
 
 
@@ -54,8 +59,30 @@ export const Gallery = () => {
     }
 
 
-    if (isSuccess) {
+    if (status === 'loading') {
+        return (
+            <Center flex={'1'}>
+                <ActivityIndicator size={'large'} />
+            </Center>
+        )
+    } else if (status === 'error') {
 
+        return (
+            <Center p="20" flex={'1'} >
+                <Icon as={MaterialIcons} name="error-outline" size={'4xl'} />
+
+                <Text fontSize="md" my={'4'}>{error as string}</Text>
+                <Button
+                    colorScheme="warning"
+                    onPress={loadMore}
+                >
+                    Click Here to try again
+                </Button>
+
+            </Center>
+        )
+
+    } else if (status === 'success') {
 
         return (
 
@@ -63,6 +90,7 @@ export const Gallery = () => {
                 data={data?.pages}
                 renderItem={renderItem}
                 estimatedItemSize={height}
+                
                 // onEndReached={loadMore}
                 onEndReachedThreshold={0.5}
                 keyExtractor={(item, index) => index.toString()}
@@ -74,9 +102,11 @@ export const Gallery = () => {
 
 
         )
+    } else {
+        return <ActivityIndicator size={'large'} />
     }
 
-    return <ActivityIndicator size={'large'} />
+
 }
 
 

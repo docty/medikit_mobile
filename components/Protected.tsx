@@ -9,7 +9,6 @@ export const Protected = () => {
 
     const { session } = useSession();
 
-
     if (type(session) === 'Null') {
         return <Account />
     } else {

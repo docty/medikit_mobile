@@ -2,12 +2,7 @@ import { keys, length, lensPath, omit, over, pick, prop, props, reject, values, 
 import { IAccount, IGalleryCollection, ITag, IUser, IUserData } from '../types';
 import { get, getId, set } from '@decimalvalues/faker'
 
-export const getLength = async () => {
-    const host = 'http://192.168.174.253:3000/faker/gallery.json/';
-    const response = await get(host);
-
-    return length(keys(response));
-}
+ 
 
 export const getRandomNumber = (count: number) => {
 
@@ -15,12 +10,16 @@ export const getRandomNumber = (count: number) => {
 }
 
 
-export const getRandomKey = async (count: number) => {
+ 
+
+export const getAnyKey = async () => {
     const host = 'http://192.168.174.253:3000/faker/gallery.json/';
 
-    const position = Math.floor(Math.random() * count);
-
     const response = await get(host);
+
+    const count = length(keys(response));
+
+    const position = Math.floor(Math.random() * count);
 
     return keys(response)[position]
 }
@@ -34,11 +33,7 @@ export const getIndividualData = async (id: string) => {
     return newSet as IGalleryCollection;
 }
 
-/**
- * Fetches a user with a given id
- * @param id user id
- * @returns 
- */
+ 
 export const getIndividualUser = async (id: string) => {
     const host = 'http://192.168.174.253:3000/faker/user.json/';
     const response = await get<IUserData>(`${host}${id}`);
@@ -78,7 +73,7 @@ export const setFollowUser = (uid: string) => {
     return Promise.resolve(true)
 }
 
- 
+
 export const fetchByTag = (tag: string) => {
 
     return ['https://outfittrends.b-cdn.net/wp-content/uploads/2021/03/D5_PADGWAAAdSmO-400x500.jpeg'];
@@ -91,7 +86,6 @@ export const getFetch = async (id: string) => {
 
     const host = 'http://192.168.174.253:3000/faker/gallery.json/';
 
-    const response = await get<IGalleryCollection>(`${host}${id}`)
 
     const predicate = (res: any) => {
         const getKeys = keys(res);
@@ -106,6 +100,7 @@ export const getFetch = async (id: string) => {
 
     }
 
+    const response = await get<IGalleryCollection>(`${host}${id}`)
     const compute = over(path, predicate, response)
 
     const newSet = prop(id, compute)

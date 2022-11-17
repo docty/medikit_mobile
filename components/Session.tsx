@@ -10,7 +10,7 @@ export const SessionProvider = ({ children }: IContext) => {
     const [session, setSession] = useState<string>('')
 
     useEffect(() => {
-            
+        //deleteItemAsync('credentials')    
         getItemAsync('credentials').then(res => {
             setSession(res!);
         }).catch(e => {

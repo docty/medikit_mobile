@@ -1,9 +1,8 @@
-import { Flex, HStack, Avatar, Text, ScrollView, Input, Center, Image, Icon, Box, Pressable } from "native-base";
-import React, { Children, FunctionComponent, useEffect, useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
-import Carousel from 'react-native-snap-carousel'
-import { ActivityIndicator, Dimensions, Keyboard } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Flex, HStack, Avatar, Text, ScrollView, Input, Center, Image, Icon, Button } from "native-base";
+import React, { useEffect, useState } from "react";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+//import Carousel from 'react-native-snap-carousel'
+import { ActivityIndicator, Dimensions, Keyboard } from "react-native"; 
 import { fetchByTag } from "../utils/firebase-adapter";
 import { useMutation, useQueries } from "react-query";
 import { values } from "ramda";
@@ -29,17 +28,24 @@ export const Search = () => {
     const isCarousel = React.useRef(null)
 
     const queryWedding = () => {
-        const response = fetchByTag('Wedding');
-        return Promise.resolve(response);
+        try {
+            const response = fetchByTag('Wedding');
+            return Promise.resolve(response);
+        } catch {
+            return Promise.reject('Network Failed')
+        }
     }
 
     const queryOuting = () => {
-        const response = fetchByTag('Outing');
-        return Promise.resolve(response);
+        try {
+            const response = fetchByTag('Outing');
+            return Promise.resolve(response);
+        } catch {
+            return Promise.reject('Network Failed')
+        }
     }
 
     const searchQuery = (id: string) => {
-
         console.log(id);
         return Promise.resolve(5)
     }
@@ -68,7 +74,32 @@ export const Search = () => {
 
     }, [])
 
-    if (wedding.isSuccess && outing.isSuccess) {
+    if (wedding.status === 'loading' || outing.status === 'loading') {
+        return (
+            <Center flex={'1'}>
+                <ActivityIndicator size={'large'} />
+            </Center>
+        )
+    } else if (wedding.status === 'error' || outing.status === 'error') {
+
+        return (
+            <Center p="20" flex={'1'} >
+                <Icon as={MaterialIcons} name="error-outline" size={'4xl'} />
+
+                <Text fontSize="md" my={'4'}>{outing.error as string}</Text>
+                <Button
+                    colorScheme="warning"
+                    onPress={queryWedding}
+                >
+                    Click Here to try again
+                </Button>
+
+            </Center>
+        )
+
+    }
+    else if (wedding.status === 'success' && outing.status === 'success') {
+
         return (
             <>
                 <HStack bg={'white'} width={'full'} px={'3'} py={'4'}>
@@ -86,10 +117,9 @@ export const Search = () => {
                 <ScrollView px={'2'} bg={'white'}>
 
 
-
                     <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Wedding Event</Text>
 
-                    <Carousel
+                    {/* <Carousel
                         layout="default"
 
                         ref={isCarousel}
@@ -102,11 +132,11 @@ export const Search = () => {
                         useScrollView={true}
                         vertical={false}
 
-                    />
+                    /> */}
 
                     <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Special Outing</Text>
 
-                    <Carousel
+                    {/* <Carousel
                         layout="default"
                         activeSlideAlignment={'start'}
                         ref={isCarousel}
@@ -117,7 +147,7 @@ export const Search = () => {
                         inactiveSlideShift={0}
                         useScrollView={true}
                         vertical={false}
-                    />
+                    /> */}
                 </ScrollView>
             </>
 

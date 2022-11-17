@@ -76,7 +76,7 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
 
     // TODO: Flashlist refresh does not update the displayed list from top
     return (
-        <Box bg={'darkBlue.900'} height={currentHeight} borderBottomWidth={'1'} borderBottomColor={'gray.800'}>
+        <Box safeAreaTop bg={'darkBlue.900'} height={currentHeight} borderBottomWidth={'1'} borderBottomColor={'gray.800'}>
             <ZStack>
                 <Center height={currentHeight - 80} w={'full'} >
                     <Image
@@ -87,7 +87,7 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
                     />
                 </Center>
 
-                <Box px={'4'} width={'full'} display={'flex'} flexDirection="row" justifyContent={'space-between'} alignItems={'center'} p={'2'}>
+                <Box mt={-5} px={'4'} width={'full'} display={'flex'} flexDirection="row" justifyContent={'space-between'} alignItems={'center'} p={'2'}>
                     <Pressable onPress={() => btnTitleClick(username, uid)}  >
                         <HStack space="1" alignItems="center">
                             <Avatar
@@ -104,32 +104,34 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
                         <Icon as={AntDesign} name="download" size={'lg'} color={'white'} fontWeight={'bold'} />
                     </Pressable>
                 </Box>
-                <HStack px={'4'} mt={currentHeight - 70} w={'full'} space="3" alignItems={'center'} justifyContent={'space-between'}>
+                <HStack px={'4'} mt={currentHeight - 100} w={'full'}  alignItems={'center'} justifyContent={'space-between'}>
                     {/* TODO: Action sheet  */}
-                    <Actionsheet
-                        isOpen={commentSheet}
-                        onClose={() => { setCommentSheet(false) }}
+                    {
+                        commentSheet && <Actionsheet
+                            isOpen={commentSheet}
+                            onClose={() => { setCommentSheet(false) }}
 
-                    >
-                        <Actionsheet.Content>
-                            <Actionsheet.Item >Comments</Actionsheet.Item>
-                            <Actionsheet.Item >
-                                <ScrollView>
-                                    {
-                                        Children.toArray(allcomments.map(item => (
-                                            <Text fontSize="4xl">Text</Text>
-                                        )))
-                                    }
+                        >
+                            <Actionsheet.Content>
+                                <Actionsheet.Item >Comments</Actionsheet.Item>
+                                <Actionsheet.Item >
+                                    <ScrollView>
+                                        {
+                                            Children.toArray(allcomments.map(item => (
+                                                <Text fontSize="4xl">Text</Text>
+                                            )))
+                                        }
 
-                                </ScrollView>
+                                    </ScrollView>
 
-                            </Actionsheet.Item>
-                            <Actionsheet.Item >
-                                <Input width={'full'} placeholder="Default Input" />
+                                </Actionsheet.Item>
+                                <Actionsheet.Item >
+                                    <Input width={'full'} placeholder="Default Input" />
 
-                            </Actionsheet.Item>
-                        </Actionsheet.Content>
-                    </Actionsheet>
+                                </Actionsheet.Item>
+                            </Actionsheet.Content>
+                        </Actionsheet>
+                    }
 
                     <Pressable onPress={btnCommentClick} _pressed={{ backgroundColor: 'gray.700' }}>
                         <Center>
@@ -140,13 +142,10 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
                         </Center>
                     </Pressable>
                     <HStack space="1" alignItems="center">
-                        <SubImages data={images} output={function (uri: string) {
-
-                            setState(uri);
-                        }} />
+                        <SubImages data={images} output={(uri: string) => { setState(uri); }} />
 
                     </HStack>
-                    
+
                     <Pressable onPress={btnLikeClick} _pressed={{ backgroundColor: 'gray.700' }}>
                         <Center>
                             <Avatar bgColor={'white'} size={'sm'}>
