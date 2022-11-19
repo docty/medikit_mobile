@@ -3,7 +3,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { Flex, HStack, Avatar, Text, Center, Button, Image, ScrollView, VStack, Divider, Box, Pressable, Icon } from "native-base";
 import { type, values } from "ramda";
 import React, { Children } from "react";
-import { ActivityIndicator, ToastAndroid } from "react-native";
+import { ActivityIndicator, Platform, ToastAndroid, Alert } from "react-native";
 import { useMutation, useQueries } from "react-query";
 import { HomeScreenNavigationProp, UserRouterProp } from "../types";
 import { getIndividualData, getIndividualUser, setFollowUser } from "../utils/firebase-adapter";
@@ -61,11 +61,14 @@ const User = () => {
 
     const btnFollow = () => {
 
-        if (type(session) === 'Null') {
-            return toast.show('Login to like a design', 300)
+        if (type(session) === 'Undefined') {
+            if (Platform.OS === 'android')
+                return toast.show('Login to follow  ' + user.data?.username, 300)
+
+
         }
 
-        console.log('btnFollow');
+        console.log(type(session));
 
         mutate(session)
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ActivityIndicator, useWindowDimensions } from 'react-native'
 import { IGalleryCollection, ISrc } from "../types";
 import { QueryFunctionContext, useInfiniteQuery } from "react-query";
@@ -25,6 +25,8 @@ export const Gallery = () => {
 
             return Promise.resolve(response)
         } catch {
+            console.log('error');
+            
             return Promise.reject('Network Failed')
         }
     }
@@ -52,7 +54,7 @@ export const Gallery = () => {
     }
 
 
-
+     
     const loadMore = async () => {
 
         fetchNextPage({ pageParam: 1 });

@@ -17,7 +17,7 @@ const toast = ToastAndroid
 const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
 
 
-    const { comments, likes, upload } = src;
+    const { comments, likes, upload, uid: srcUid } = src;
     const { session } = useSession();
     const images = values(upload);
 
@@ -46,11 +46,12 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
     }
 
     const likeDesign = (id: string) => {
-        return setLikeAction(id)
+
+        return setLikeAction(uid, id)
     }
 
 
-    const { mutate, data: likeData } = useMutation({
+    const { mutate } = useMutation({
         mutationKey: ['search'],
         mutationFn: likeDesign
     })
@@ -61,7 +62,7 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
             return toast.show('Login to like a design', 300)
         }
 
-        mutate(session)
+        mutate(srcUid)
         setLike(p => !p);
 
     }
@@ -104,7 +105,7 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
                         <Icon as={AntDesign} name="download" size={'lg'} color={'white'} fontWeight={'bold'} />
                     </Pressable>
                 </Box>
-                <HStack px={'4'} mt={currentHeight - 100} w={'full'}  alignItems={'center'} justifyContent={'space-between'}>
+                <HStack px={'4'} mt={currentHeight - 100} w={'full'} alignItems={'center'} justifyContent={'space-between'}>
                     {/* TODO: Action sheet  */}
                     {
                         commentSheet && <Actionsheet
@@ -138,7 +139,7 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
                             <Avatar bgColor={'white'} size={'sm'}>
                                 <Icon as={AntDesign} name="like1" size={'md'} />
                             </Avatar>
-                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(likes).length}</Text>
+                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(comments).length}</Text>
                         </Center>
                     </Pressable>
                     <HStack space="1" alignItems="center">
@@ -151,7 +152,7 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
                             <Avatar bgColor={'white'} size={'sm'}>
                                 <Icon as={AntDesign} name="heart" size={'lg'} color={`${like && 'red.500'}`} />
                             </Avatar>
-                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(comments).length}</Text>
+                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(likes).length}</Text>
                         </Center>
                     </Pressable>
                 </HStack>
