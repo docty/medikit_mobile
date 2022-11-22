@@ -72,8 +72,9 @@ export interface IUserData {
     username: string
     fullName: string;
     displayImage: string
-    followers: Record<string, IBoolean>
-    following: Record<string, IBoolean>
+    followers?: Record<string, IBoolean> | null
+    following?: Record<string, IBoolean> | null;
+    dateCreated?: string;
 }
 
 export type ITag = 'Wedding' | 'Outing' | 'Graduation';
