@@ -2,7 +2,7 @@ import { keys, length, lensPath, omit, over, pick, prop, props, reject, values, 
 import { IAccount, IGalleryCollection, ITag, IUser, IUserData } from '../types';
 import { get, getId, set } from '@decimalvalues/faker'
 
-
+const url = 'http://192.168.135.140:3000/'
 
 export const getRandomNumber = (count: number) => {
 
@@ -12,7 +12,7 @@ export const getRandomNumber = (count: number) => {
 
 export const getAnyKey = async () => {
 
-    const host = 'http://127.0.0.1:3000/faker/gallery.json/'
+    const host = url+'faker/gallery.json/'
     const response = await get(host);
     const count = length(keys(response));
     const position = Math.floor(Math.random() * count);
@@ -23,7 +23,7 @@ export const getAnyKey = async () => {
 
 
 export const getIndividualData = async (id: string) => {
-    const host = 'http://127.0.0.1:3000/faker/gallery.json/';
+    const host = url+'faker/gallery.json/';
     const response = await get<IGalleryCollection>(`${host}${id}`);
     const newSet = prop(id, response) as unknown
     return newSet as IGalleryCollection;
@@ -31,7 +31,7 @@ export const getIndividualData = async (id: string) => {
 
 
 export const getIndividualUser = async (id: string) => {
-    const host = 'http://127.0.0.1:3000/faker/user.json/';
+    const host = url+'faker/user.json/';
     const response = await get<IUserData>(`${host}${id}`);
     const newSet = prop(id, response) as unknown
     return newSet as IUserData;
@@ -39,7 +39,7 @@ export const getIndividualUser = async (id: string) => {
 
 
 export const registerUser = async (data: IAccount) => {
-    const host = 'http://127.0.0.1:3000/faker/user.json/';
+    const host = url+'faker/user.json/';
 
     const uid = getId();
 
@@ -61,7 +61,7 @@ export const registerUser = async (data: IAccount) => {
 }
 
 export const setLikeAction = async (uid: string, srcUid: string) => {
-    const host = 'http://127.0.0.1:3000/faker/gallery.json/';
+    const host = url+'faker/gallery.json/';
 
     const likeUid = getId();
 
@@ -81,7 +81,7 @@ export const setLikeAction = async (uid: string, srcUid: string) => {
 
 export const setFollowUser =  async (uid: string) => {
 
-    const host = 'http://127.0.0.1:3000/faker/user.json/';
+    const host = url+'faker/user.json/';
     console.log(uid);
     
     const followersUid = getId();
@@ -111,7 +111,7 @@ export const getFetch = async (id: string) => {
     const path = lensPath([id, 'src']);
 
 
-    const host = 'http://127.0.0.1:3000/faker/gallery.json/'
+    const host = url+'faker/gallery.json/'
 
     const predicate = (res: any) => {
         const getKeys = keys(res);
