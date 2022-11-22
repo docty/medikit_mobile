@@ -42,7 +42,7 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
     }
 
     const btnCommentClick = () => {
-        setCommentSheet(true)
+       // setCommentSheet(true)
     }
 
     const likeDesign = (id: string) => {
@@ -137,9 +137,9 @@ const Thumbnail = ({ username, uid, src, displayImage }: IGallery) => {
                     <Pressable onPress={btnCommentClick} _pressed={{ backgroundColor: 'gray.700' }}>
                         <Center>
                             <Avatar bgColor={'white'} size={'sm'}>
-                                <Icon as={AntDesign} name="like1" size={'md'} />
+                                {/* <Icon as={AntDesign} name="like1" size={'md'} /> */}
                             </Avatar>
-                            <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(comments).length}</Text>
+                            {/* <Text fontSize="xs" color={'white'} fontWeight={'bold'}>{Object.values(comments).length}</Text> */}
                         </Center>
                     </Pressable>
                     <HStack space="1" alignItems="center">
