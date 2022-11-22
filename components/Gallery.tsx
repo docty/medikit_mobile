@@ -92,8 +92,7 @@ export const Gallery = () => {
                 data={data?.pages}
                 renderItem={renderItem}
                 estimatedItemSize={height}
-                
-                // onEndReached={loadMore}
+                onEndReached={loadMore}
                 onEndReachedThreshold={0.5}
                 keyExtractor={(item, index) => index.toString()}
                 pagingEnabled={true}

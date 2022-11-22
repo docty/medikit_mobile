@@ -117,7 +117,7 @@ export const Search = () => {
                 <ScrollView px={'2'} bg={'white'}>
 
 
-                    <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Wedding Event</Text>
+                    {/* <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Wedding Event</Text> */}
 
                     {/* <Carousel
                         layout="default"
@@ -134,7 +134,7 @@ export const Search = () => {
 
                     /> */}
 
-                    <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Special Outing</Text>
+                    {/* <Text px={'3'} fontSize="md" bg={'white'} color={'blueGray.700'} fontWeight={'semibold'}>Special Outing</Text> */}
 
                     {/* <Carousel
                         layout="default"

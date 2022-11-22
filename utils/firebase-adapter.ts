@@ -2,7 +2,7 @@ import { keys, length, lensPath, omit, over, pick, prop, props, reject, values, 
 import { IAccount, IGalleryCollection, ITag, IUser, IUserData } from '../types';
 import { get, getId, set } from '@decimalvalues/faker'
 
-const url = 'http://192.168.135.140:3000/'
+const url = 'http://192.168.12.140:3000/'
 
 export const getRandomNumber = (count: number) => {
 
