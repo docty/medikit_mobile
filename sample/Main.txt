@@ -2,9 +2,9 @@ import { Box, Center, useColorModeValue, Image, Avatar, Text, Flex, HStack, Icon
 import React from "react";
 import { Dimensions, Animated, StatusBar, Pressable } from "react-native";
 import { SceneMap, TabView } from "react-native-tab-view";
-import { Gallery } from "./Gallery";
+import { Gallery } from "./Home";
 import { Profile } from "./Profile";
-import { Search } from "./Search";
+import { Search } from "./Appointment";
 import { AntDesign } from '@expo/vector-icons'
 
 

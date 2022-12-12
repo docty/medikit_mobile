@@ -6,7 +6,7 @@ export type StackParamListBase = {
     Account: undefined
     Login: undefined
     Register: undefined
-    Home: undefined
+    Dashboard: undefined
     User: {
         username: string
         uid: string

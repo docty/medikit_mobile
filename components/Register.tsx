@@ -141,11 +141,12 @@ export const Register = () => {
 
                 <Center>
                     <Button
-                        w={'1/2'}
+                        w={'3/4'}
                         rounded={'full'}
                         colorScheme="success"
-                        onPress={() => navigate('Home')}
-
+                        onPress={() => navigate('Dashboard')}
+                        _text={{fontWeight: 'bold'}}
+                        p={'4'}
                     >
                         Create an account
                     </Button>
@@ -157,6 +158,7 @@ export const Register = () => {
                     <Text fontSize="xs">Already have an account?</Text>
                     <Button
                         variant={'link'}
+                        ml={'-2'}
                         colorScheme="primary"
                         onPress={() => {
                             navigate('Login')

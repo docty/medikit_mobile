@@ -62,7 +62,7 @@ export const Login = () => {
                                 console.log('hello')
                             }}
 
-                        >
+                        > 
                             Forgot Password?
                         </Button>
 
@@ -73,10 +73,12 @@ export const Login = () => {
 
                 <Center>
                     <Button
-                        w={'1/2'}
+                        w={'3/4'}
                         rounded={'full'}
                         colorScheme="success"
-                        onPress={() => navigate('Home')}
+                        onPress={() => navigate('Dashboard')}
+                        p={'4'}
+                        _text={{fontWeight: 'bold'}}
 
                     >
                         Login
@@ -86,10 +88,11 @@ export const Login = () => {
 
 
                 <HStack justifyContent={'center'} alignItems={'center'}>
-                    <Text fontSize="xs">Are you a new user?</Text>
+                    <Text fontSize="sm">Are you a new user?</Text>
 
                     <Button
                         variant={'link'}
+                        ml={'-2'}
                         colorScheme="primary"
                         onPress={() => {
                             navigate('Register')

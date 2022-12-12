@@ -1,0 +1,115 @@
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { Flex, HStack, Avatar, Text, Button, ScrollView, VStack, Divider, Icon, Spacer, Center } from "native-base";
+import { not, values } from "ramda";
+import React, { Children } from "react";
+import { ActivityIndicator } from "react-native";
+import Carousel from "react-native-snap-carousel";
+import { useQueries } from "react-query";
+import { IUpload } from "../types";
+//import { getIndividualData, getIndividualUser } from "../utils/firebase-adapter";
+import { ITEM_WIDTH, SLIDER_WIDTH } from "./Appointment";
+import { useSession } from "./Session";
+ 
+
+
+
+export const Profile = () => {
+
+    const { session } = useSession();
+
+
+    const getProfile = async () => {
+
+        try {
+            const response = null;// await getIndividualData(session)
+            return Promise.resolve(response);
+        } catch {
+            return Promise.reject('Network Failed')
+        }
+    }
+
+
+    const getUser = async () => {
+        try {
+            const response = null;//await getIndividualUser(session)
+            return Promise.resolve(response);
+        } catch {
+            return Promise.reject('Network Failed')
+        }
+    }
+
+
+    const { "0": profile, "1": user } = useQueries([
+        { queryKey: 'profile', queryFn: getProfile },
+        { queryKey: 'user', queryFn: getUser }
+    ])
+
+
+
+    // TODO: Configure the image upload correctly
+    const btnUpload = () => {
+        console.log('btnUpload');
+    }
+
+    const isCarousel = React.useRef(null)
+
+    if (user.status === 'loading' || profile.status === 'loading') {
+        return (
+            <Center flex={'1'}>
+                <ActivityIndicator size={'large'} />
+            </Center>
+        )
+    } else if (user.status === 'error' || profile.status === 'error') {
+
+        return (
+            <Center p="20" flex={'1'} >
+                <Icon as={MaterialIcons} name="error-outline" size={'4xl'} />
+
+                <Text fontSize="md" my={'4'}>{user.error as string}</Text>
+                <Button
+                    colorScheme="warning"
+                    onPress={getProfile}
+                >
+                    Click Here to try again
+                </Button>
+
+            </Center>
+        )
+
+    } else if (profile.status === 'success' && user.status === 'success') {
+
+        return (
+            <>
+                <VStack safeAreaTop bg={'white'} space="3" justifyContent={'center'} display={'flex'} alignItems={'center'} pt={'4'}>
+                    
+                    <VStack pb={'3'}>
+                        <Button
+                            colorScheme="secondary"
+                            onPress={btnUpload}
+                            px={'10'}
+                        >
+                            Upload
+                        </Button>
+                    </VStack>
+
+                </VStack>
+                 
+            </>
+        )
+    }
+    else {
+        return <ActivityIndicator size={'large'} />
+    }
+
+
+}
+
+
+const CarouselCardItem = ({ item, index }: { item: IUpload, index: number }) => {
+
+
+    return (
+       null
+
+    )
+}
