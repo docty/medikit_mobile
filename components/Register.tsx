@@ -143,10 +143,8 @@ export const Register = () => {
                     <Button
                         w={'1/2'}
                         rounded={'full'}
-                        colorScheme="primary"
-                        onPress={() => {
-                            console.log('hello')
-                        }}
+                        colorScheme="success"
+                        onPress={() => navigate('Home')}
 
                     >
                         Create an account
