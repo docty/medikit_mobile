@@ -1,5 +1,5 @@
-# Afrik Gallery 
-Afrik Gallery is a mobile application purposely developed to help users get access to unlimited number of fashion design and many more. 
+# Medikit 
+Medikit is a mobile application purposely developed to help users get access to professional health care assistances.
  
  
 ## Run Locally  
@@ -7,13 +7,13 @@ Afrik Gallery is a mobile application purposely developed to help users get acce
 Clone the project  
 
 ~~~bash  
-  git clone https://gitlab.com/decimalvalues/afrik-gallery
+  git clone https://github.com/docty/medikit
 ~~~
 
 Go to the project directory  
 
 ~~~bash  
-  cd afrik-gallery
+  cd medikit
 ~~~
 
 Install dependencies  

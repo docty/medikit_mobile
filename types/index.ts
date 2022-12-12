@@ -3,6 +3,9 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
 export type StackParamListBase = {
+    Account: undefined
+    Login: undefined
+    Register: undefined
     Home: undefined
     User: {
         username: string

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "afrik",
-    "slug": "afrik",
+    "name": "medikit",
+    "slug": "medikit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,7 +25,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.pancake.afrik"
+      "package": "com.pancake.medikit"
     },
     "web": {
       "favicon": "./assets/favicon.png"

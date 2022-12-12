@@ -1,18 +1,20 @@
 import { AntDesign, Fontisto } from "@expo/vector-icons";
-import { Center, Button, VStack, Icon, Input } from "native-base";
+import { Center, Button, Text, Image, VStack, Icon, Input, Box, ZStack } from "native-base";
 import React, { useState, useEffect } from "react";
 import { useMutation } from "react-query";
 import { IAccount } from "../types";
 import { registerUser } from "../utils/firebase-adapter";
 import { setItemAsync } from 'expo-secure-store'
 import { useSession } from "./Session";
+import { ImageBackground, useWindowDimensions, StyleSheet } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 
 
 type IActive = 'register' | 'login'
 
 export const Account = () => {
-
+     
     const [active, setActive] = useState<boolean>(false);
     const [section, setSection] = useState<IActive>('register');
     const [user, setUser] = useState<IAccount>({
@@ -22,7 +24,7 @@ export const Account = () => {
         password: '123456789'
     } as IAccount)
     const { setSession } = useSession();
-
+    const navigation = useNavigation<any>();
     const sendData = async (response: any) => {
 
         return await registerUser(response);
@@ -65,39 +67,53 @@ export const Account = () => {
 
 
     return (
-        <Center height={'full'} bg={'white'} >
-            {
-                active && panel[section]
+        <Box flex={1} safeAreaTop>
+            <ImageBackground
+                source={require('../assets/1.jpg')}
+                style={style.imageBackground}
 
-            }
-
-            <Button
-                colorScheme="primary"
-                mt={'10'}
-                minW={'2/3'}
-                variant={'solid'}
-                onPress={() => onbtnClick(`${section === 'register' ? 'register' : 'login'}`)}
             >
-                {section === 'register' ? 'Create Afrik Account' : 'Login'}
-            </Button>
-            <Button
-                colorScheme="blue"
-                variant={'link'}
-                mt={'1'}
-                onPress={() => onbtnClick(`${section === 'register' ? 'login' : 'register'}`)}
-            >
-                {section === 'register' ? 'Already have an account?  Click here to login' : 'Are you new to afrik?   Click here to create account'}
-            </Button>
+                <Box  bg="black" position={'absolute'} top={'0'} left={'0'} right={'0'} bottom={'0'} opacity={'0.8'}>
+                    Box
+                </Box>
+                
+                <Box px={'6'}  w={'full'}>
+                    <Text textAlign={'center'} fontWeight={'bold'} color={'white'} fontSize={'5xl'}>Stay Healthy Live Well</Text>
+                </Box>
 
 
+                <VStack space="5" mt={'16'} w={'1/2'}>
+                    <Button rounded={'full'}  _text={{fontWeight: 'bold'}} background={'emerald.500'} onPress={() => navigation.navigate('Login')}>
+                        Login
+                    </Button>
+                    <Button rounded={'full'} background={'white'} _text={{color: 'blue.500', fontWeight: 'bold'}} onPress={() => navigation.navigate('Register')}>
+                        Create account
+                    </Button>
+                </VStack>
 
+             </ImageBackground>
 
-        </Center>
+        </Box>
+
 
     )
 
 
 }
+
+const style = StyleSheet.create({
+    imageBackground: {
+        flex: 1,
+        resizeMode: 'contain',
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px'
+
+    }
+})
 
 
 interface IComp {

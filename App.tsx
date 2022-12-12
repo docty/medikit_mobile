@@ -7,7 +7,10 @@ import User from "./components/User";
 import Enlarge from "./components/Enlarge";
 import { StackParamListBase } from "./types";
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { StatusBar } from "expo-status-bar"; 
+import { StatusBar } from "expo-status-bar";
+import { Account } from "./components/Account";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
 
 const Stack = createNativeStackNavigator<StackParamListBase>();
 const queryClient = new QueryClient();
@@ -20,6 +23,21 @@ export default function App() {
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
             <Stack.Navigator>
+              <Stack.Screen
+                name="Account"
+                options={{ headerShown: false}}
+                component={Account}
+              />
+              <Stack.Screen
+                name="Register"
+                options={{ header: () => null }}
+                component={Register}
+              />
+              <Stack.Screen
+                name="Login"
+                options={{  header: () => null  }}
+                component={Login}
+              />
               <Stack.Screen
                 name="Home"
                 options={{ headerShown: false }}
