@@ -1,14 +1,14 @@
 {
   "cli": {
-    "version": ">= 2.6.0"
+    "version": ">= 2.7.1"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "personal"
+      "distribution": "internal"
     },
     "preview": {
-      "distribution": "personal",
+      "distribution": "internal",
       "android": {
         "buildType": "apk"
       }
