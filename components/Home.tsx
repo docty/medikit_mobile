@@ -3,6 +3,7 @@ import { Dimensions } from 'react-native'
 import { Box, Button, Center, HStack, Icon, Text, Image, Input, IconButton, ScrollView, VStack, Pressable } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Carousel from "react-native-snap-carousel";
+import { useNavigation } from "@react-navigation/native";
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = 300;
@@ -11,7 +12,7 @@ const ITEM_WIDTH = 300;
 export const Home = () => {
 
     const isCarousel = React.useRef(null);
-
+    const { navigate } = useNavigation<any>();
 
     const categories = [
         {
@@ -83,9 +84,7 @@ export const Home = () => {
     const DoctorsItem = ({ item, index }: any) => {
         return (
             <Pressable
-                onPress={() => {
-                    console.log('hello')
-                }}
+                onPress={() => navigate('Doctor')}
 
             >
                 <HStack space="3" p={'4'} alignItems="center" bg={'white'} shadow={'4'} rounded={'lg'}>
@@ -111,7 +110,7 @@ export const Home = () => {
                 <Text fontWeight={'semibold'} fontSize="xs">Hi, Developer</Text>
                 <HStack justifyContent={'space-between'} space="3" alignItems="center">
                     <Text fontSize="lg" fontWeight={'bold'}>Find your Doctor!</Text>
-                    <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'}/>
+                    <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
                 </HStack>
                 <HStack space="3" alignItems="center" mt={'4'} >
                     <Input bg={'white'} InputLeftElement={<Icon as={Ionicons} name="search-outline" ml={'2'} />

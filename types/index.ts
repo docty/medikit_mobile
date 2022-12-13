@@ -15,6 +15,8 @@ export type StackParamListBase = {
         uri: string
     }
     Profile: undefined
+    Doctor: undefined
+    Message: undefined
 }
 
 

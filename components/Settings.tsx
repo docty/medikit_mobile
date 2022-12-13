@@ -26,18 +26,6 @@ export const Settings = () => {
             >
                 <HStack space="3" bg={'white'} rounded={'full'} py={'5'} px={'4'} alignItems="center">
                     <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" />
-                    <Text fontSize="sm" fontWeight={'bold'}>My Appointments</Text>
-                    <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" ml={'auto'} />
-                </HStack>
-            </Pressable>
-
-            <Pressable
-                onPress={() => {
-                    console.log('hello')
-                }}
-            >
-                <HStack space="3" bg={'white'} rounded={'full'} py={'5'} px={'4'} alignItems="center">
-                    <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" />
                     <Text fontSize="sm" fontWeight={'bold'}>Payment Meethod</Text>
                     <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" ml={'auto'} />
                 </HStack>

@@ -10,6 +10,8 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import { Profile } from "./components/Profile";
+import { Doctor } from "./components/Doctor";
+import { Message } from "./components/Message";
 
 const Stack = createNativeStackNavigator<StackParamListBase>();
 const queryClient = new QueryClient();
@@ -44,8 +46,18 @@ export default function App() {
               />
               <Stack.Screen
                 name="Profile"
-                options={{ headerShadowVisible: false, headerTintColor: 'red.500' }}
+                options={{ headerShadowVisible: false }}
                 component={Profile}
+              />
+              <Stack.Screen
+                name="Doctor"
+                options={{ headerShadowVisible: false }}
+                component={Doctor}
+              />
+              <Stack.Screen
+                name="Message"
+                options={{ headerShadowVisible: false }}
+                component={Message}
               />
             </Stack.Navigator>
           </QueryClientProvider>
