@@ -1,11 +1,12 @@
 import { Box, HStack, Avatar, Text, ScrollView, Input, Center, Image, Icon, Button, VStack, Divider } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "react-native";
 
 export const Appointment = () => {
 
     return (
-        <ScrollView p={'4'} bg={'blue.100'}>
+        <ScrollView p={'4'} bg={'blue.100'} mt={StatusBar.currentHeight}>
             <Box bg={'white'} p={'4'} shadow={'4'} rounded={'md'}>
                 <HStack space="3" alignItems="center" justifyContent={'space-between'}>
                     <VStack space="1">

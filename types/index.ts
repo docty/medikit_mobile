@@ -14,14 +14,14 @@ export type StackParamListBase = {
     Enlarge: {
         uri: string
     }
+    Profile: undefined
 }
 
 
 export type BottomTabNavigationParamList = {
-    Search: undefined
-    Gallery: undefined
-    Profile: undefined
-    Account: undefined
+    Settings: undefined
+    Home: undefined
+    Appointment: undefined 
 }
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<StackParamListBase>

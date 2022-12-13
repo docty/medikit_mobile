@@ -4,12 +4,13 @@ import React from "react";
 import { Home } from "./Home";
 import { Appointment } from "./Appointment";
 import { Ionicons } from "@expo/vector-icons";
-import { StatusBar } from "react-native"; 
+import { StatusBar } from "react-native";
+import { Settings } from "./Settings";
 const Tab = createBottomTabNavigator()
 
 const Dashboard = () => {
 
- 
+
     return (
         <>
             <StatusBar />
@@ -21,7 +22,8 @@ const Dashboard = () => {
                         title: 'Home',
                         tabBarIcon: () => <Icon as={Ionicons} name="home-outline" size={'lg'} />,
                         header: () => <Box h={StatusBar.currentHeight} rounded="lg" />,
-                    }} />
+                    }}
+                />
                 <Tab.Screen
                     name={'Appointment'}
                     component={Appointment}
@@ -32,9 +34,19 @@ const Dashboard = () => {
                         header: () => null
                     }}
                 />
+                <Tab.Screen
+                    name={'Settings'}
+                    component={Settings}
+                    options={{
+                        tabBarIcon: () => <Icon as={Ionicons} name="search-outline" size={'lg'} />,
+                        title: 'Settings',
+                        tabBarLabel: 'Settings',
+                        header: () => null
+                    }}
+                />
 
 
-               
+
 
             </Tab.Navigator>
         </>

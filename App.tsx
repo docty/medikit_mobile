@@ -9,21 +9,22 @@ import { Account } from "./components/Account";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import Dashboard from "./components/Dashboard";
+import { Profile } from "./components/Profile";
 
 const Stack = createNativeStackNavigator<StackParamListBase>();
 const queryClient = new QueryClient();
- 
+
 export default function App() {
   return (
     <>
       <StatusBar style='auto' />
       <NativeBaseProvider>
-        <NavigationContainer> 
+        <NavigationContainer>
           <QueryClientProvider client={queryClient}>
             <Stack.Navigator>
               <Stack.Screen
                 name="Account"
-                options={{ headerShown: false}}
+                options={{ headerShown: false }}
                 component={Account}
               />
               <Stack.Screen
@@ -33,13 +34,18 @@ export default function App() {
               />
               <Stack.Screen
                 name="Login"
-                options={{  header: () => null  }}
+                options={{ header: () => null }}
                 component={Login}
               />
               <Stack.Screen
                 name="Dashboard"
                 options={{ headerShown: false }}
                 component={Dashboard}
+              />
+              <Stack.Screen
+                name="Profile"
+                options={{ headerShadowVisible: false, headerTintColor: 'red.500' }}
+                component={Profile}
               />
             </Stack.Navigator>
           </QueryClientProvider>
