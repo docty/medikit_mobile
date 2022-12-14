@@ -14,28 +14,20 @@ export const Register = () => {
     } as IRegister)
 
     return (
-        <Box safeArea bg="white" p="2" flex={1} >
-            <IconButton
-                variant="ghost"
-                icon={<Icon size="md" as={Ionicons} name="chevron-back-outline" color="black" />}
-                onPress={() => navigate('Account')}
-                w={'12'}
-            />
+        <Box safeArea bg="white" flex={1}>
+            <Center bg={'pink.700'} mb={'4'} pb={'8'} pt={'3'} roundedBottom={'3xl'} >
+                <Text fontSize="3xl" color={'white'} fontWeight={'bold'}>Create Account</Text>
+                <Text fontSize="sm" color={'white'}>Enter your details to create an account</Text>
+            </Center>
 
-
-            <Box p="2" flex={1} justifyContent={'space-between'}>
-                <Center >
-                    <Text fontSize="3xl" fontWeight={'bold'}>Create Account</Text>
-                    <Text fontSize="sm">Enter your details to create an account</Text>
-                </Center>
-
-
+            <Box p="6" flex={1} justifyContent={'space-between'}>
                 <VStack space="2">
                     <FormControl  >
                         <FormControl.Label>Full name</FormControl.Label>
                         <Input
                             placeholder="Full name"
-                            rounded={'full'}
+                            rounded={'xl'}
+                            p={'3'}
                             value={user.fullName}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="person-outline" />}
                             onChangeText={(text) => setUser({ ...user, email: text })}
@@ -46,7 +38,8 @@ export const Register = () => {
                         <FormControl.Label>Email</FormControl.Label>
                         <Input
                             placeholder="Email"
-                            rounded={'full'}
+                            rounded={'xl'}
+                            p={'3'}
                             value={user.email}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="mail-outline" />}
                             onChangeText={(text) => setUser({ ...user, email: text })}
@@ -57,42 +50,23 @@ export const Register = () => {
                         <FormControl.Label>Phone Number</FormControl.Label>
                         <Input
                             placeholder="Phone Number"
-                            rounded={'full'}
+                            rounded={'xl'}
+                            p={'3'}
                             value={user.phoneNumber}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="call-outline" />}
                             onChangeText={(text) => setUser({ ...user, email: text })}
                         />
 
                     </FormControl>
-                    <FormControl  >
-                        <FormControl.Label>Gender</FormControl.Label>
-                        <HStack borderWidth={'1'} alignItems={'center'} borderColor={'gray.300'} p={'1'} w={'full'} rounded="full">
-                            <Icon as={Ionicons} size={'lg'} ml={'2'} name="male-female-outline" />
-                            <Select
-                                placeholder="Select your gender"
-                                minWidth="full"
-                                defaultValue={user.gender}
-                                rounded={'full'}
-                                borderWidth={'0'}
-                                flex={'1'}
-                            >
-                                <Select.Item label="Male " value="Male" />
-                                <Select.Item label="Female" value="Female" />
-                            </Select>
-                        </HStack>
-
-
-
-
-                    </FormControl>
-
+                    
                     <FormControl>
                         <FormControl.Label>Password</FormControl.Label>
                         <Input
                             placeholder="Password"
                             type="password"
                             value={user.password}
-                            rounded={'full'}
+                            rounded={'xl'}
+                            p={'3'}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="lock-closed-outline" />}
                             onChangeText={(text) => setUser({ ...user, password: text })}
                         />
@@ -100,8 +74,9 @@ export const Register = () => {
                     <FormControl  >
                         <FormControl.Label>Confirm Password</FormControl.Label>
                         <Input
-                            placeholder="Confirm Password"
-                            rounded={'full'}
+                            placeholder="Confirm Password" 
+                            rounded={'xl'}
+                            p={'3'}
                             type="password"
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="lock-closed-outline" />}
                             onChangeText={(text) => setUser({ ...user, email: text })}
@@ -114,7 +89,8 @@ export const Register = () => {
                         </Checkbox>
                         <Button
                             variant={'link'}
-                            colorScheme="primary"
+                            colorScheme="pink"
+                            mx={'-2'}
                             onPress={() => {
                                 console.log('hello')
                             }}
@@ -126,7 +102,8 @@ export const Register = () => {
 
                         <Button
                             variant={'link'}
-                            colorScheme="primary"
+                            colorScheme="pink"
+                            ml={'-2'}
                             onPress={() => {
                                 console.log('hello')
                             }}
@@ -143,9 +120,9 @@ export const Register = () => {
                     <Button
                         w={'3/4'}
                         rounded={'full'}
-                        colorScheme="success"
+                        colorScheme="amber"
                         onPress={() => navigate('Dashboard')}
-                        _text={{fontWeight: 'bold'}}
+                        _text={{ fontWeight: 'bold' }}
                         p={'4'}
                     >
                         Create an account
@@ -159,7 +136,7 @@ export const Register = () => {
                     <Button
                         variant={'link'}
                         ml={'-2'}
-                        colorScheme="primary"
+                        colorScheme="pink"
                         onPress={() => {
                             navigate('Login')
                         }}

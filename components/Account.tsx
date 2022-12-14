@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, Text, VStack, Box } from "native-base";
+import { Button, Text, VStack, Box, Center } from "native-base";
 import React from "react";
 import { ImageBackground, StyleSheet } from "react-native";
 
@@ -15,18 +15,18 @@ export const Account = () => {
                 style={style.backgroundImage}
             >
                 <Box bg={'black'} top={'0'} opacity={'0.8'} bottom={'0'} left={'0'} right={'0'} position={'absolute'} >d</Box>
-                
-                <VStack space="32"w={'full'} >
-                    <Box px={'6'} w={'full'}>
+                <VStack space="32" w={'full'} >
+                    <Center px={'6'} w={'full'}>
+                        <Text color={'white'} fontWeight={'bold'} fontSize={'6xl'}> <Text color={'pink.700'}>Medi</Text>kit</Text>
+                        <Text fontSize="md" color={'white'} >Choose your own virtual doctor</Text>
 
-                        <Text color={'white'} textAlign={'center'} fontWeight={'bold'} fontSize={'5xl'}>Welcome to Medikit</Text>
-                    </Box>
+                    </Center>
 
                     <Box mx={'auto'} w={'3/4'}>
-                        <Button colorScheme={'success'} onPress={() => navigate('Login')} rounded={'full'} p={'4'} _text={{fontWeight: 'bold'}} >
+                        <Button colorScheme={'amber'} onPress={() => navigate('Login')} rounded={'xl'} p={'4'} _text={{ fontWeight: 'bold' }} >
                             Login
                         </Button>
-                        <Button variant={'outline'} bg={'white'} mt={'6'} onPress={() => navigate('Register')} rounded={'full'} p={'4'} _text={{fontWeight: 'bold'}}> 
+                        <Button bg={'white'} mt={'8'} onPress={() => navigate('Register')} rounded={'xl'} p={'4'} _text={{ fontWeight: 'bold', color: 'amber.600' }} _hover={{ _text: { color: 'white' }, bg: 'pink.700' }}>
                             Create account
                         </Button>
                     </Box>

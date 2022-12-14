@@ -11,28 +11,20 @@ export const Login = () => {
     } as ILogin)
 
     return (
-        <Box safeArea bg="white" p="2" flex={1} >
-            <IconButton
-                variant="ghost"
-                icon={<Icon size="md" as={Ionicons} name="chevron-back-outline" color="black" />}
-                onPress={()=> navigate('Account')}
-                w={'12'}
-            />
-            
-            
-            <Box  p="2" flex={1} justifyContent={'space-between'}>
-                <Center >
-                    <Text fontSize="3xl" fontWeight={'bold'}>Hello, Welcome Back</Text>
-                    <Text fontSize="sm">Please login into your account</Text>
-                </Center>
+        <Box safeArea bg="white"  flex={1} >
+            <Center bg={'pink.700'} mb={'12'} pb={'8'} pt={'3'} roundedBottom={'3xl'} >
+                <Text fontSize="3xl" color={'white'} fontWeight={'bold'}>Hello, Welcome Back</Text>
+                <Text fontSize="sm" color={'white'}>Please login into your account</Text>
+            </Center>
 
-
+            <Box p="6" flex={1} justifyContent={'space-between'}>
                 <VStack space="5">
                     <FormControl  >
                         <FormControl.Label>Email</FormControl.Label>
                         <Input
                             placeholder="Email"
-                            rounded={'full'}
+                            rounded={'xl'}
+                            p={'3'}
                             value={user.email}
                             InputLeftElement={<Icon as={Fontisto} size={'lg'} ml={'2'} name="email" />}
                             onChangeText={(text) => setUser({ ...user, email: text })}
@@ -46,7 +38,8 @@ export const Login = () => {
                             placeholder="Password"
                             type="password"
                             value={user.password}
-                            rounded={'full'}
+                            rounded={'xl'}
+                            p={'3'}
                             InputLeftElement={<Icon as={AntDesign} size={'lg'} ml={'2'} name="lock" />}
                             onChangeText={(text) => setUser({ ...user, password: text })}
                         />
@@ -57,12 +50,12 @@ export const Login = () => {
                         </Checkbox>
                         <Button
                             variant={'link'}
-                            colorScheme="primary"
+                            colorScheme="pink"
                             onPress={() => {
                                 console.log('hello')
                             }}
 
-                        > 
+                        >
                             Forgot Password?
                         </Button>
 
@@ -74,11 +67,11 @@ export const Login = () => {
                 <Center>
                     <Button
                         w={'3/4'}
-                        rounded={'full'}
-                        colorScheme="success"
+                        rounded={'xl'}
+                        colorScheme={'amber'}
                         onPress={() => navigate('Dashboard')}
                         p={'4'}
-                        _text={{fontWeight: 'bold'}}
+                        _text={{ fontWeight: 'bold' }}
 
                     >
                         Login
@@ -93,7 +86,7 @@ export const Login = () => {
                     <Button
                         variant={'link'}
                         ml={'-2'}
-                        colorScheme="primary"
+                        colorScheme="pink"
                         onPress={() => {
                             navigate('Register')
                         }}

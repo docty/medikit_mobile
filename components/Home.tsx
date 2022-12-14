@@ -38,7 +38,7 @@ export const Home = () => {
             name: 'Dr. Asiedu Henry',
             field: 'Surgeon',
             reviews: '43',
-            price: '42'
+            price: 'Free'
         },
         {
             name: 'Dr. Fosu Priscilla',
@@ -69,6 +69,8 @@ export const Home = () => {
                 onPress={() => {
                     console.log('hello')
                 }}
+                borderWidth={'1'}
+                borderColor={'gray.300'}
 
             >
                 <Center  >
@@ -85,9 +87,13 @@ export const Home = () => {
         return (
             <Pressable
                 onPress={() => navigate('Doctor')}
-
+                bg={'white'}
+                shadow={'2'}
+                rounded={'lg'}
+                borderWidth={'1'}
+                borderColor={'gray.300'}
             >
-                <HStack space="3" p={'4'} alignItems="center" bg={'white'} shadow={'4'} rounded={'lg'}>
+                <HStack space="3" p={'4'} alignItems="center" >
                     <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
                     <VStack space="1" >
                         <Text fontSize="md" fontWeight={'bold'}>{item.name}</Text>
@@ -106,7 +112,7 @@ export const Home = () => {
     }
     return (
         <>
-            <Box p="4" bg={'blue.50'}>
+            <Box p="4" bg={'white'}>
                 <Text fontWeight={'semibold'} fontSize="xs">Hi, Developer</Text>
                 <HStack justifyContent={'space-between'} space="3" alignItems="center">
                     <Text fontSize="lg" fontWeight={'bold'}>Find your Doctor!</Text>
@@ -114,10 +120,10 @@ export const Home = () => {
                 </HStack>
                 <HStack space="3" alignItems="center" mt={'4'} >
                     <Input bg={'white'} InputLeftElement={<Icon as={Ionicons} name="search-outline" ml={'2'} />
-                    } placeholder="Search for a doctor" rounded={'full'} flex={'1'} />
+                    } placeholder="Search for a doctor" rounded={'xl'} flex={'1'} p={'3'} />
                     <IconButton
                         variant="solid"
-                        colorScheme={'success'}
+                        colorScheme={'amber'}
                         icon={<Icon size="md" as={Ionicons} name="options-outline" color="white" />}
                         onPress={() => {
                             console.log('hello')
@@ -126,14 +132,14 @@ export const Home = () => {
                     />
                 </HStack>
             </Box>
-            <ScrollView p="4" bg={'blue.50'}>
+            <ScrollView p="4" bg={'white'}>
                 <Box my={'2'}>
                     <HStack justifyContent={'space-between'} space="3" alignItems="center">
                         <Text fontWeight={'bold'} fontSize="md">Appointments</Text>
                         <Button
                             variant={'ghost'}
                             colorScheme="primary"
-                            onPress={() => null}
+                            onPress={() => navigate('Appointment')}
                             _text={{ fontWeight: 'semibold' }}
                         >
                             See all
@@ -143,7 +149,7 @@ export const Home = () => {
                         <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
                         <VStack space="1" >
                             <Text fontSize="md" color={'white'} fontWeight={'semibold'}>Dr. Asiedu Henry</Text>
-                            <Text fontSize="xs" color={'white'}>Surgeon</Text>
+                            <Text fontSize="xs" color={'gray.300'}>Surgeon</Text>
                             <Text fontSize="sm" color={'white'} fontWeight={'semibold'}>Today, 02:00PM</Text>
                         </VStack>
                         <IconButton
@@ -164,7 +170,7 @@ export const Home = () => {
                         <Button
                             variant={'ghost'}
                             colorScheme="primary"
-                            onPress={() => null}
+                            onPress={() => navigate('DoctorList')}
                             _text={{ fontWeight: 'semibold' }}
                         >
                             See all
@@ -181,6 +187,7 @@ export const Home = () => {
                         inactiveSlideShift={0}
                         useScrollView={true}
                         vertical={false}
+
                     />
 
                 </Box>
@@ -193,7 +200,7 @@ export const Home = () => {
                         <Button
                             variant={'ghost'}
                             colorScheme="primary"
-                            onPress={() => null}
+                            onPress={() => navigate('DoctorList')}
                             _text={{ fontWeight: 'semibold' }}
                         >
                             See all

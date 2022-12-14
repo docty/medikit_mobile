@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import { Profile } from "./components/Profile";
 import { Doctor } from "./components/Doctor";
 import { Message } from "./components/Message";
+import { DoctorList } from "./components/DoctorList";
 
 const Stack = createNativeStackNavigator<StackParamListBase>();
 const queryClient = new QueryClient();
@@ -31,12 +32,22 @@ export default function App() {
               />
               <Stack.Screen
                 name="Register"
-                options={{ header: () => null }}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                  headerStyle: { backgroundColor: 'rgb(190, 24, 93)' },
+                  headerTintColor: 'white'
+                }}
                 component={Register}
               />
               <Stack.Screen
                 name="Login"
-                options={{ header: () => null }}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                  headerStyle: { backgroundColor: 'rgb(190, 24, 93)' },
+                  headerTintColor: 'white'
+                }}
                 component={Login}
               />
               <Stack.Screen
