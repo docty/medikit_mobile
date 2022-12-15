@@ -6,8 +6,8 @@ export const Doctor = () => {
     const { navigate } = useNavigation<any>();
 
     return (
-        <Box p="4" flex={'1'} justifyContent={'space-between'} bg={'white'}>
-            <VStack p="4" bg={'blueGray.700'} rounded="md" shadow={'4'} space={'6'}>
+        <Box p="4" flex={'1'} justifyContent={'space-between'} bg={'white'} >
+            <VStack p="4" bg={'blueGray.700'} rounded="md" shadow={'4'} space={'8'}>
                 <HStack space={'6'}>
                     <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
                     <VStack space="1">
@@ -18,15 +18,15 @@ export const Doctor = () => {
 
                 <HStack alignItems="center" justifyContent={'space-between'}>
                     <Flex direction="row" alignItems="center">
-                        <Icon as={Ionicons} mr={'2'} name="home-outline" />
-                        <Text fontSize="xs" color={'white'}>$120</Text>
+                        <Icon as={Ionicons} mr={'2'} color={'gray.100'} name="home-outline" />
+                        <Text fontSize="xs" fontWeight={'bold'} color={'white'}>$Free</Text>
                     </Flex>
                     <Flex direction="row" alignItems="center">
-                        <Icon as={Ionicons} mr={'2'} name="search-outline" />
+                        <Icon as={Ionicons} mr={'2'} color={'gray.100'} name="search-outline" />
                         <Text fontSize="xs" color={'white'}>1.5M</Text>
                     </Flex>
                     <Flex direction="row" alignItems="center">
-                        <Icon as={Ionicons} mr={'2'} name="home" />
+                        <Icon as={Ionicons} color={'gray.100'} mr={'2'} name="home" />
                         <Text fontSize="xs" color={'white'}>30 Reviews</Text>
                     </Flex>
                 </HStack>
@@ -41,24 +41,15 @@ export const Doctor = () => {
 
             <Box>
                 <Text fontSize="sm" fontWeight={'bold'}>About</Text>
-                <Text fontSize="xs" >Dr. Asiedu Henry has extensive experience in internal medicine and hospital settlement... <Button
-                    variant={'link'}
-                    colorScheme="primary"
-                    onPress={() => {
-                        console.log('hello')
-                    }}
-
-                >
-                    Read more
-                </Button>
-                </Text>
+                <Text fontSize="xs" >Dr. Asiedu Henry has extensive experience in internal medicine and hospital settlement.             
+ </Text>
 
             </Box>
             <Box>
                 <Text fontSize="sm" fontWeight={'bold'}>Location</Text>
-                <HStack space="3" alignItems="center" shadow={'4'} p="4" rounded="md">
-                    <Icon as={Ionicons} name="location-outline" />
-                    <VStack space="3">
+                <HStack space="3" alignItems="center"   p="4" rounded="md">
+                    <Icon as={Ionicons} size={'xl'} name="location-outline" />
+                    <VStack space="1">
                         <Text fontWeight={'bold'} fontSize="sm">Helix Hospital</Text>
                         <Text fontSize="xs">Suame, Ghana</Text>
                     </VStack>
@@ -79,7 +70,7 @@ export const Doctor = () => {
                     </Button>
                 </HStack>
 
-                <VStack space="3" shadow={'4'} p="4" rounded="md">
+                <VStack space="3"   p="4" rounded="md">
                     <HStack space="3">
                         <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
                         <VStack>
@@ -104,11 +95,13 @@ export const Doctor = () => {
             <Button
                 colorScheme="primary"
                 w={'3/4'}
+p={'3'}
                 mx={'auto'}
-                rounded={'full'}
+                rounded={'lg'}
                 onPress={() => {
                     console.log('hello')
                 }}
+_text={{fontWeight: 'bold'}}
             >
                 Book Appointment
             </Button>

@@ -6,11 +6,11 @@ import { StatusBar } from "react-native";
 export const Appointment = () => {
 
     return (
-        <Box>
+        <Box  p={'4'}  safeArea bg={'white'} flex={'1'}>
             <Text fontSize="2xl" fontWeight={'bold'} textAlign={'center'}>Appointment</Text>
 
-            <ScrollView p={'4'} bg={'blue.100'} mt={StatusBar.currentHeight}>
-                <Box bg={'white'} p={'4'} shadow={'4'} rounded={'md'}>
+            <ScrollView   mt={StatusBar.currentHeight}>
+                <Box bg={'white'} p={'4'}borderWidth={'1'} borderColor={'gray.100'} rounded={'md'}>
                     <HStack space="3" alignItems="center" justifyContent={'space-between'}>
                         <VStack space="1">
                             <Text fontSize="md" fontWeight={'bold'}>Dr. Asiedu Henry</Text>
@@ -33,8 +33,8 @@ export const Appointment = () => {
                     </HStack>
 
                     <Button.Group justifyContent={'space-between'}>
-                        <Button colorScheme="danger" w={'2/5'} rounded={'full'}>Cancel</Button>
-                        <Button colorScheme="teal" w={'2/5'} rounded={'full'}>Reschedule</Button>
+                        <Button colorScheme="danger" w={'2/5'} rounded={'lg'}>Cancel</Button>
+                        <Button colorScheme="teal" w={'2/5'} rounded={'lg'}>Reschedule</Button>
                     </Button.Group>
 
                 </Box>
