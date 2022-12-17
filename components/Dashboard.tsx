@@ -14,7 +14,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <StatusBar />
+            <StatusBar  />
             <Tab.Navigator>
                 <Tab.Screen
                     name={'Home'}

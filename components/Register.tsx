@@ -14,7 +14,7 @@ export const Register = () => {
     } as IRegister)
 
     return (
-        <Box safeArea bg="white" flex={1}>
+        <Box bg="white" flex={1}>
             <Center bg={'pink.700'} mb={'4'} pb={'8'} pt={'3'} roundedBottom={'3xl'} >
                 <Text fontSize="3xl" color={'white'} fontWeight={'bold'}>Create Account</Text>
                 <Text fontSize="sm" color={'white'}>Enter your details to create an account</Text>

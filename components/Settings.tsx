@@ -8,9 +8,12 @@ export const Settings = () => {
     const { navigate } = useNavigation<any>();
 
     return (
-        <VStack space="5" safeArea p={'4'} bg={'blue.100'} flex={'1'}>
+        <VStack space="5" safeArea p={'4'} bg={'white'} flex={'1'}>
+ <Text  fontSize="2xl" fontWeight={'bold'} textAlign={'center'}>Settings</Text>
+            
             <Pressable
                 onPress={() => navigate('Profile')}
+		borderBottomWidth={'1'} borderColor={'gray.100'}
             >
                 <HStack space="3" bg={'white'} rounded={'full'} py={'2'} px={'4'} alignItems="center">
                     <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
@@ -23,6 +26,7 @@ export const Settings = () => {
                 onPress={() => {
                     console.log('hello')
                 }}
+borderBottomWidth={'1'} borderColor={'gray.100'}
             >
                 <HStack space="3" bg={'white'} rounded={'full'} py={'5'} px={'4'} alignItems="center">
                     <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" />
@@ -35,6 +39,7 @@ export const Settings = () => {
                 onPress={() => {
                     console.log('hello')
                 }}
+borderBottomWidth={'1'} borderColor={'gray.100'}
             >
                 <HStack space="3" bg={'white'} rounded={'full'} py={'5'} px={'4'} alignItems="center">
                     <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" />
@@ -48,6 +53,7 @@ export const Settings = () => {
                 onPress={() => {
                     console.log('hello')
                 }}
+borderBottomWidth={'1'} borderColor={'gray.100'}
             >
                 <HStack space="3" bg={'white'} rounded={'full'} py={'5'} px={'4'} alignItems="center">
                     <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" />

@@ -65,12 +65,13 @@ export const Home = () => {
             <Pressable
                 bg={'white'}
                 p={'2'}
-                shadow={'4'}
+               
                 onPress={() => {
                     console.log('hello')
                 }}
+               rounded={'lg'}
                 borderWidth={'1'}
-                borderColor={'gray.300'}
+                borderColor={'gray.100'}
 
             >
                 <Center  >
@@ -88,10 +89,10 @@ export const Home = () => {
             <Pressable
                 onPress={() => navigate('Doctor')}
                 bg={'white'}
-                shadow={'2'}
+                 
                 rounded={'lg'}
                 borderWidth={'1'}
-                borderColor={'gray.300'}
+                borderColor={'gray.100'}
             >
                 <HStack space="3" p={'4'} alignItems="center" >
                     <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
@@ -113,7 +114,7 @@ export const Home = () => {
     return (
         <>
             <Box p="4" bg={'white'}>
-                <Text fontWeight={'semibold'} fontSize="xs">Hi, Developer</Text>
+                <Text fontWeight={'semibold'} fontSize="xs">Welcome, Developer</Text>
                 <HStack justifyContent={'space-between'} space="3" alignItems="center">
                     <Text fontSize="lg" fontWeight={'bold'}>Find your Doctor!</Text>
                     <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />

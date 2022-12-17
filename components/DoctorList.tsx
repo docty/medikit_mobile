@@ -6,14 +6,14 @@ export const DoctorList = () => {
     const { navigate } = useNavigation<any>();
 
     return (
-        <VStack p="4" flex={'1'} bg={'white'} space={'6'}>
+        <VStack p="4" flex={'1'} bg={'white'} space={'6'} safeArea>
             <Text  fontSize="2xl" fontWeight={'bold'} textAlign={'center'}>Doctors</Text>
             
             <Input placeholder="Search Doctor" rounded={'xl'} bg={'white'} p={'3'} InputLeftElement={<Icon as={Ionicons} name="search-outline" mx={'2'} />
             } />
 
-            <Pressable onPress={() => navigate('Doctor')} borderWidth={'1'} borderColor={'gray.200'}> 
-                <HStack space="3" shadow={'2'} p="4" rounded="lg" >
+            <Pressable onPress={() => navigate('Doctor')}  rounded="lg"  borderWidth={'1'} borderColor={'gray.100'}> 
+                <HStack space="3"   p="4" >
                     <Image source={require('../assets/2.jpg')} size={12} rounded={'full'} alt={'Avatar'} />
                     <VStack alignItems={'stretch'} justifyContent={'space-between'}>
                         <Text fontWeight={'bold'} fontSize="sm">Dr. Asiedu Henry</Text>

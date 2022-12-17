@@ -5,7 +5,7 @@ export const Profile = () => {
     return (
         <Box bg="white" p="4" safeArea flex={'1'} justifyContent={'space-between'}>
             <Center>
-                <Image source={require('../assets/2.jpg')} size={24} mb={'2'} rounded={'full'} alt={'Avatar'} />
+                <Image source={require('../assets/image6.png')} size={24} mb={'2'} rounded={'full'} alt={'Avatar'} />
                 <Button
                     variant={'outline'}
                     colorScheme="primary"
@@ -22,46 +22,33 @@ export const Profile = () => {
             <VStack space="3">
                 <FormControl>
                     <FormControl.Label>Full Name</FormControl.Label>
-                    <Input bg={'white'} p={'3'} placeholder="Full Name" rounded={'full'} />
+                    <Input bg={'white'} p={'3'} placeholder="Full Name" rounded={'lg'} />
                 </FormControl>
 
                 <FormControl>
                     <FormControl.Label>Email</FormControl.Label>
-                    <Input bg={'white'} p={'3'} placeholder="Email" rounded={'full'} />
+                    <Input bg={'white'} p={'3'} placeholder="Email" rounded={'lg'} />
                 </FormControl>
 
                 <FormControl>
                     <FormControl.Label>Phone Number</FormControl.Label>
-                    <Input bg={'white'} p={'3'} placeholder="Phone Number" rounded={'full'} />
+                    <Input bg={'white'} p={'3'} placeholder="Phone Number" rounded={'lg'} />
                 </FormControl>
  
-                <FormControl>
-                    <FormControl.Label>Gender</FormControl.Label>
-                    <Select
-                        placeholder="Select your gender"
-                        minWidth="full"
-                        p={'3'}
-                        bg={'white'}
-                        rounded={'full'}
-                        borderWidth={'1'}
-                        flex={'1'}
-                    >
-                        <Select.Item label="Male " value="Male" />
-                        <Select.Item label="Female" value="Female" />
-                    </Select>
-                </FormControl>
+                 
 
             </VStack>
 
             <Button
-                colorScheme="primary"
+                colorScheme="amber"
                 w={'3/4'}
+p={'3'}
                 mx={'auto'}
                 _text={{ fontWeight: 'bold' }}
                 onPress={() => {
                     console.log('hello')
                 }}
-                rounded={'full'}
+                rounded={'lg'}
 
             >
                 Save
