@@ -20,7 +20,7 @@ const queryClient = new QueryClient();
 export default function App() {
   return (
     <>
-      <StatusBar style='auto' />
+      <StatusBar style='auto'  translucent={true} />
       <NativeBaseProvider>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
