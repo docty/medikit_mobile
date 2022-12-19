@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from 'react-native'
-import { Box, Button, Center, HStack, Icon, Text, Image, Input, IconButton, ScrollView, VStack, Pressable } from "native-base";
+import { Box, View, Button, Center, HStack, Icon, Text, Image, Input, IconButton, ScrollView, VStack, Pressable } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
@@ -66,9 +66,7 @@ export const Home = () => {
                 bg={'white'}
                 p={'2'}
                
-                onPress={() => {
-                    console.log('hello')
-                }}
+                onPress={() => navigate('DoctorList')}
                rounded={'lg'}
                 borderWidth={'1'}
                 borderColor={'gray.100'}
@@ -112,7 +110,7 @@ export const Home = () => {
         )
     }
     return (
-        <>
+        <VStack safeArea flex={'1'}>
             <Box p="4" bg={'white'}>
                 <Text fontWeight={'semibold'} fontSize="xs">Welcome, Developer</Text>
                 <HStack justifyContent={'space-between'} space="3" alignItems="center">
@@ -225,7 +223,7 @@ export const Home = () => {
             </ScrollView>
 
 
-        </>
+        </VStack>
 
     )
 

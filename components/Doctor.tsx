@@ -26,7 +26,7 @@ export const Doctor = () => {
                         <Text fontSize="xs" color={'white'}>1.5M</Text>
                     </Flex>
                     <Flex direction="row" alignItems="center">
-                        <Icon as={Ionicons} color={'gray.100'} mr={'2'} name="home" />
+                        <Icon as={Ionicons} color={'gray.100'} mr={'2'} name="star-outline" />
                         <Text fontSize="xs" color={'white'}>30 Reviews</Text>
                     </Flex>
                 </HStack>

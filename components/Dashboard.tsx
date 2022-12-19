@@ -14,22 +14,30 @@ const Dashboard = () => {
 
     return (
         <>
-            <StatusBar  />
-            <Tab.Navigator>
+           <StatusBar  barStyle={'dark-content'} backgroundColor={'#fff'}/>
+            <Tab.Navigator screenOptions={{
+		tabBarStyle:{backgroundColor: 'rgb(10, 40, 50)'}
+}}>
                 <Tab.Screen
                     name={'Home'}
                     component={Home}
-                    options={{
-                        title: 'Home',
-                        tabBarIcon: () => <Icon as={Ionicons} name="home-outline" size={'lg'} />,
-                        header: () => <Box h={StatusBar.currentHeight} rounded="lg" />,
+ 			options={{
+                        tabBarActiveBackgroundColor: 'rgb(210, 100, 10)',
+			tabBarLabelStyle: {color:'#fff'},
+ 			tabBarAllowFontScaling: true,
+ 			title: 'Home',
+                        tabBarIcon: () => <Icon as={Ionicons} name="home-outline" size={'lg'} color={'white'}/>,
+                        header: () => null,
                     }}
                 />
                 <Tab.Screen
                     name={'DoctorList'}
                     component={DoctorList}
                     options={{
-                        tabBarIcon: () => <Icon as={Ionicons} name="medical-outline" size={'lg'} />,
+tabBarActiveBackgroundColor: 'rgb(210, 100, 10)',
+			tabBarLabelStyle: {color:'#fff'},
+ 			tabBarAllowFontScaling: true,
+                        tabBarIcon: () => <Icon as={Ionicons} name="medical-outline" size={'lg'} color={'white'} />,
                         title: 'Doctors',
                         tabBarLabel: 'Doctors',
                         header: () => null
@@ -39,7 +47,10 @@ const Dashboard = () => {
                     name={'Appointment'}
                     component={Appointment}
                     options={{
-                        tabBarIcon: () => <Icon as={Ionicons} name="book-outline" size={'lg'} />,
+tabBarActiveBackgroundColor: 'rgb(210, 100, 10)',
+			tabBarLabelStyle: {color:'#fff'},
+ 			tabBarAllowFontScaling: true,
+                        tabBarIcon: () => <Icon as={Ionicons} name="book-outline" size={'lg'} color={'white'} />,
                         title: 'Appointment',
                         tabBarLabel: 'Appointment',
                         header: () => null
@@ -50,7 +61,10 @@ const Dashboard = () => {
                     name={'Settings'}
                     component={Settings}
                     options={{
-                        tabBarIcon: () => <Icon as={Ionicons} name="cog-outline" size={'lg'} />,
+tabBarActiveBackgroundColor: 'rgb(210, 100, 10)',
+			tabBarLabelStyle: {color:'#fff'},
+ 			tabBarAllowFontScaling: true,
+                        tabBarIcon: () => <Icon as={Ionicons} name="cog-outline" size={'lg'} color={'white'}/>,
                         title: 'Settings',
                         tabBarLabel: 'Settings',
                         header: () => null

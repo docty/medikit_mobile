@@ -30,7 +30,7 @@ borderBottomWidth={'1'} borderColor={'gray.100'}
             >
                 <HStack space="3" bg={'white'} rounded={'full'} py={'5'} px={'4'} alignItems="center">
                     <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" />
-                    <Text fontSize="sm" fontWeight={'bold'}>Payment Meethod</Text>
+                    <Text fontSize="sm" fontWeight={'bold'}>Payment Method</Text>
                     <Icon as={Ionicons} size={'md'} name="chevron-forward-outline" ml={'auto'} />
                 </HStack>
             </Pressable>
