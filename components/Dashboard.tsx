@@ -14,12 +14,17 @@ const Dashboard = () => {
 
     return (
         <>
-            <StatusBar  />
+            <StatusBar barStyle={'light-content'} />
             <Tab.Navigator>
                 <Tab.Screen
                     name={'Home'}
                     component={Home}
+
                     options={{
+                        tabBarStyle: {paddingBottom: '0px'},
+                        tabBarItemStyle: {paddingBottom: '10px'},
+                        tabBarIconStyle: {color: 'blue'},
+                        tabBarActiveBackgroundColor: 'rgb(120, 44, 65)',
                         title: 'Home',
                         tabBarIcon: () => <Icon as={Ionicons} name="home-outline" size={'lg'} />,
                         header: () => <Box h={StatusBar.currentHeight} rounded="lg" />,

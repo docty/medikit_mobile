@@ -1,6 +1,6 @@
 import { Fontisto, AntDesign, Ionicons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
-import { VStack, Input, Icon, Box, Text, FormControl, HStack, Checkbox, Button, Center, IconButton } from "native-base"
+import { VStack, Input, Icon, Box, Text, FormControl, HStack, Checkbox, Button, Center, IconButton, ScrollView } from "native-base"
 import { useState } from "react"
 
 export const Login = () => {
@@ -11,19 +11,19 @@ export const Login = () => {
     } as ILogin)
 
     return (
-        <Box bg="white"  flex={1} >
-            <Center bg={'pink.700'} mb={'12'} pb={'8'} pt={'3'} roundedBottom={'3xl'} >
-                <Text fontSize="3xl" color={'white'} fontWeight={'bold'}>Hello, Welcome Back</Text>
+        <>
+            <Center bg={'pink.700'} pb={'8'} roundedBottom={'2xl'} >
+                {/* <Text fontSize="2xl" color={'white'} fontWeight={'bold'}>Hello, Welcome Back</Text> */}
                 <Text fontSize="sm" color={'white'}>Please login into your account</Text>
             </Center>
 
-            <Box p="6" flex={1} justifyContent={'space-between'}>
+            <ScrollView p="6" flex={1} bg="white">
                 <VStack space="5">
                     <FormControl  >
                         <FormControl.Label>Email</FormControl.Label>
                         <Input
                             placeholder="Email"
-                            rounded={'xl'}
+                            rounded={'lg'}
                             p={'3'}
                             value={user.email}
                             InputLeftElement={<Icon as={Fontisto} size={'lg'} ml={'2'} name="email" />}
@@ -38,7 +38,7 @@ export const Login = () => {
                             placeholder="Password"
                             type="password"
                             value={user.password}
-                            rounded={'xl'}
+                            rounded={'lg'}
                             p={'3'}
                             InputLeftElement={<Icon as={AntDesign} size={'lg'} ml={'2'} name="lock" />}
                             onChangeText={(text) => setUser({ ...user, password: text })}
@@ -64,7 +64,7 @@ export const Login = () => {
 
                 </VStack>
 
-                <Center>
+                <Center my={'6'}>
                     <Button
                         w={'3/4'}
                         rounded={'xl'}
@@ -97,11 +97,12 @@ export const Login = () => {
 
 
                 </HStack>
-            </Box>
+            </ScrollView>
 
 
 
-        </Box>
+
+        </>
 
 
     )

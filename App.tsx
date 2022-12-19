@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StackParamListBase } from "./types";
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from "react-native";
 import { Account } from "./components/Account";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
@@ -20,7 +20,7 @@ const queryClient = new QueryClient();
 export default function App() {
   return (
     <>
-      <StatusBar style='auto'  />
+      <StatusBar barStyle={'light-content'}  />
       <NativeBaseProvider>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>
@@ -33,7 +33,8 @@ export default function App() {
               <Stack.Screen
                 name="Register"
                 options={{
-                  title: '',
+                  title: 'Create Account',
+                  headerTitleAlign: 'center',
                   headerShadowVisible: false,
                   headerStyle: { backgroundColor: 'rgb(190, 24, 93)' },
                   headerTintColor: 'white'
@@ -43,7 +44,8 @@ export default function App() {
               <Stack.Screen
                 name="Login"
                 options={{
-                  title: '',
+                  title: 'Login',
+                  headerTitleAlign: 'center',
                   headerShadowVisible: false,
                   headerStyle: { backgroundColor: 'rgb(190, 24, 93)' },
                   headerTintColor: 'white'

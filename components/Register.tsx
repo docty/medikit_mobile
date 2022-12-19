@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
-import { VStack, Input, Icon, Box, Text, FormControl, HStack, Checkbox, Button, Center, Select, IconButton } from "native-base"
+import { VStack, Input, Icon, Box, Text, FormControl, HStack, Checkbox, Button, Center, Select, IconButton, ScrollView } from "native-base"
 import { useState } from "react"
 
 export const Register = () => {
@@ -14,19 +14,19 @@ export const Register = () => {
     } as IRegister)
 
     return (
-        <Box bg="white" flex={1}>
-            <Center bg={'pink.700'} mb={'4'} pb={'8'} pt={'3'} roundedBottom={'3xl'} >
-                <Text fontSize="3xl" color={'white'} fontWeight={'bold'}>Create Account</Text>
+        <>
+            <Center bg={'pink.700'} pb={'8'} roundedBottom={'2xl'} >
+                {/* <Text fontSize="2xl" color={'white'} fontWeight={'bold'}>Create Account</Text> */}
                 <Text fontSize="sm" color={'white'}>Enter your details to create an account</Text>
             </Center>
 
-            <Box p="6" flex={1} justifyContent={'space-between'}>
+            <ScrollView p="6" flex={1} bg="white">
                 <VStack space="2">
                     <FormControl  >
                         <FormControl.Label>Full name</FormControl.Label>
                         <Input
                             placeholder="Full name"
-                            rounded={'xl'}
+                            rounded={'lg'}
                             p={'3'}
                             value={user.fullName}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="person-outline" />}
@@ -38,7 +38,7 @@ export const Register = () => {
                         <FormControl.Label>Email</FormControl.Label>
                         <Input
                             placeholder="Email"
-                            rounded={'xl'}
+                            rounded={'lg'}
                             p={'3'}
                             value={user.email}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="mail-outline" />}
@@ -50,7 +50,7 @@ export const Register = () => {
                         <FormControl.Label>Phone Number</FormControl.Label>
                         <Input
                             placeholder="Phone Number"
-                            rounded={'xl'}
+                            rounded={'lg'}
                             p={'3'}
                             value={user.phoneNumber}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="call-outline" />}
@@ -58,14 +58,14 @@ export const Register = () => {
                         />
 
                     </FormControl>
-                    
+
                     <FormControl>
                         <FormControl.Label>Password</FormControl.Label>
                         <Input
                             placeholder="Password"
                             type="password"
                             value={user.password}
-                            rounded={'xl'}
+                            rounded={'lg'}
                             p={'3'}
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="lock-closed-outline" />}
                             onChangeText={(text) => setUser({ ...user, password: text })}
@@ -74,8 +74,8 @@ export const Register = () => {
                     <FormControl  >
                         <FormControl.Label>Confirm Password</FormControl.Label>
                         <Input
-                            placeholder="Confirm Password" 
-                            rounded={'xl'}
+                            placeholder="Confirm Password"
+                            rounded={'lg'}
                             p={'3'}
                             type="password"
                             InputLeftElement={<Icon as={Ionicons} size={'lg'} ml={'2'} name="lock-closed-outline" />}
@@ -119,7 +119,8 @@ export const Register = () => {
                 <Center>
                     <Button
                         w={'3/4'}
-                        rounded={'full'}
+                        my={'6'}
+                        rounded={'xl'}
                         colorScheme="amber"
                         onPress={() => navigate('Dashboard')}
                         _text={{ fontWeight: 'bold' }}
@@ -132,7 +133,7 @@ export const Register = () => {
 
 
                 <HStack justifyContent={'center'} alignItems={'center'}>
-                    <Text fontSize="xs">Already have an account?</Text>
+                    <Text fontSize="sm">Already have an account?</Text>
                     <Button
                         variant={'link'}
                         ml={'-2'}
@@ -148,9 +149,9 @@ export const Register = () => {
 
                 </HStack>
 
-            </Box>
+            </ScrollView>
 
-        </Box>
+        </>
     )
 }
 
