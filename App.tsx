@@ -19,7 +19,9 @@ const queryClient = new QueryClient();
 export default function App() {
   return (
     <>
+
       <StatusBar barStyle={'light-content'} backgroundColor={'rgb(190, 24, 93)'}  />
+
       <NativeBaseProvider>
         <NavigationContainer>
           <QueryClientProvider client={queryClient}>

@@ -14,6 +14,7 @@ const Dashboard = () => {
 
     return (
         <>
+
            <StatusBar  barStyle={'dark-content'} backgroundColor={'#fff'}/>
             <Tab.Navigator screenOptions={{
 		tabBarStyle:{backgroundColor: 'rgb(10, 40, 50)'}
@@ -28,6 +29,7 @@ const Dashboard = () => {
  			title: 'Home',
                         tabBarIcon: () => <Icon as={Ionicons} name="home-outline" size={'lg'} color={'white'}/>,
                         header: () => null,
+
                     }}
                 />
                 <Tab.Screen
